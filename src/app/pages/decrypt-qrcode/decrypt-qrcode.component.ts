@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./decrypt-qrcode.component.scss']
 })
 export class DecryptQrcodeComponent implements OnInit {
+
+  @ViewChild('pin', { read: ElementRef })
+  pin?: ElementRef<HTMLVideoElement>;
 
   encrypted?: string;
 

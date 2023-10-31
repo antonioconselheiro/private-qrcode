@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import QrScanner from 'qr-scanner';
 
@@ -11,6 +11,7 @@ export class ScanQrcodeComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video', { read: ElementRef })
   videoEl?: ElementRef<HTMLVideoElement>;
+
   scanning?: QrScanner;
 
   constructor(
