@@ -12,7 +12,7 @@ export class DecryptQrcodeComponent implements OnInit {
 
   constructor(
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.encrypted = history.state.data;

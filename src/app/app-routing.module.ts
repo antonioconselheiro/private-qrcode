@@ -17,7 +17,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'read',
+    path: 'scan',
     component: ScanQrcodeComponent
   },
 
