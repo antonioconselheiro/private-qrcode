@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GenerateQrcodeComponent } from './pages/generate-qrcode/generate-qrcode.component';
 import { ReadQrcodeComponent } from './pages/read-qrcode/read-qrcode.component';
+import { DecryptQrcodeComponent } from './pages/decrypt-qrcode/decrypt-qrcode.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,11 @@ const routes: Routes = [
   {
     path: 'read',
     component: ReadQrcodeComponent
+  },
+
+  {
+    path: 'open',
+    component: DecryptQrcodeComponent
   },
 
   {

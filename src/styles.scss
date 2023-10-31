@@ -29,7 +29,7 @@ app-root {
     &:active,
     &.active {
       box-shadow: inset 0 0 6px 3px rgb(0 0 0 / 55%) !important;
-      color:rgb(255 255 255 / 75%) !important;
+      color:rgb(0 0 0 / 75%) !important;
       background-color: #ddd;
     }
 
@@ -43,6 +43,7 @@ app-root {
 
       &:active,
       &.active {
+        color:rgb(255 255 255 / 75%) !important;
         background-color: #940303;
       }
     }
