@@ -8,24 +8,40 @@
 
   .textarea {
     flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
 
-    textarea {
-      height: 100%;
-      width: 100%;
+    > textarea,
+    > input[type="password"],
+    > input[type="text"] {
       padding: 1rem;
       box-sizing: border-box;
       font-size: 20px;
       border: 2px solid;
       border-radius: 5px;
+      width: 100%;
+      background-color: #efefef;
+    }
+
+    textarea {
+      flex: 1 1 0px;
+      margin-bottom: 1rem;
     }
   }
   
   .buttons {
     flex: 0 0 20px;
-    justify-content: space-between;
+    display: flex;
+    justify-content: end;
 
     > button {
       margin: .25rem;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin: .25rem;
+      }
     }
   }
 }
