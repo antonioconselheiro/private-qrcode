@@ -6,6 +6,7 @@ import { DecryptQrcodeModule } from './pages/decrypt-qrcode/decrypt-qrcode.modul
 import { GenerateQrcodeModule } from './pages/generate-qrcode/generate-qrcode.module';
 import { HomeModule } from './pages/home/home.module';
 import { ScanQrcodeModule } from './pages/scan-qrcode/scan-qrcode.module';
+import { CryptModule } from './shared/crypt/crypt.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ScanQrcodeModule } from './pages/scan-qrcode/scan-qrcode.module';
     DecryptQrcodeModule,
     GenerateQrcodeModule,
     HomeModule,
-    ScanQrcodeModule
+    ScanQrcodeModule,
+    CryptModule
   ],
   providers: [],
   bootstrap: [AppComponent]

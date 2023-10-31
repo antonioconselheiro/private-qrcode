@@ -18,7 +18,7 @@ export class DecryptQrcodeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.encrypted = history.state.data;
+    this.encrypted = history.state.opened;
     if (!this.encrypted) {
       this.router.navigate(['home']);
     }

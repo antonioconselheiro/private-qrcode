@@ -4,6 +4,7 @@ import { GenerateQrcodeComponent } from './pages/generate-qrcode/generate-qrcode
 import { ScanQrcodeComponent } from './pages/scan-qrcode/scan-qrcode.component';
 import { DecryptQrcodeComponent } from './pages/decrypt-qrcode/decrypt-qrcode.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ShareQrcodeComponent } from './pages/share-qrcode/share-qrcode.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'open',
     component: DecryptQrcodeComponent
+  },
+
+  {
+    path: 'share',
+    component: ShareQrcodeComponent
   },
 
   {
