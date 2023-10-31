@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReadQrcodeComponent } from './read-qrcode.component';
+import { ScanQrcodeComponent } from './scan-qrcode.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    ReadQrcodeComponent
+    ScanQrcodeComponent
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
   exports: [
-    ReadQrcodeComponent
+    ScanQrcodeComponent
   ]
 })
-export class ReadQrcodeModule { }
+export class ScanQrcodeModule { }

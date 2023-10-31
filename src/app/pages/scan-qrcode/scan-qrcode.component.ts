@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import QrScanner from 'qr-scanner';
 
 @Component({
-  selector: 'app-read-qrcode',
-  templateUrl: './read-qrcode.component.html',
-  styleUrls: ['./read-qrcode.component.scss']
+  selector: 'app-scan-qrcode',
+  templateUrl: './scan-qrcode.component.html',
+  styleUrls: ['./scan-qrcode.component.scss']
 })
-export class ReadQrcodeComponent implements AfterViewInit, OnDestroy {
+export class ScanQrcodeComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video', { read: ElementRef })
   videoEl?: ElementRef<HTMLVideoElement>;
@@ -34,8 +34,7 @@ export class ReadQrcodeComponent implements AfterViewInit, OnDestroy {
   private async readQRCode(video: HTMLVideoElement): Promise<void> {
     const qrScanner = new QrScanner(
       video, result => {
-        debugger;
-        this.router.navigate([ 'home' ], {
+        this.router.navigate([ 'open' ], {
           state: {
             data: result.data
           }

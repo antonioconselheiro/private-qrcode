@@ -17,6 +17,12 @@ app-root {
   border-radius: 4px;
   font-size: 17px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin: .25rem;
+  }
 
   &:not(:disabled):not(.disabled) {
     background-color: white;

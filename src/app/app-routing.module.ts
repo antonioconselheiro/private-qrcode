@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GenerateQrcodeComponent } from './pages/generate-qrcode/generate-qrcode.component';
-import { ReadQrcodeComponent } from './pages/read-qrcode/read-qrcode.component';
+import { ScanQrcodeComponent } from './pages/scan-qrcode/scan-qrcode.component';
 import { DecryptQrcodeComponent } from './pages/decrypt-qrcode/decrypt-qrcode.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
     path: 'home',
+    component: HomeComponent
+  },
+
+  {
+    path: 'generate',
     component: GenerateQrcodeComponent
   },
 
   {
     path: 'read',
-    component: ReadQrcodeComponent
+    component: ScanQrcodeComponent
   },
 
   {
