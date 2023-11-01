@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CryptService } from 'src/app/shared/crypt/crypt.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class DecryptQrcodeComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private cryptService: CryptService
   ) { }
 
@@ -37,7 +39,9 @@ export class DecryptQrcodeComponent implements OnInit {
   unlock(): void {
     if (this.form.valid && this.encrypted) {
       const raw = this.form.getRawValue();
-      this.cryptService.decrypt(this.encrypted, raw.key);
+      const opened = this.cryptService.decrypt(this.encrypted, raw.key);
+
+      this.router.navigate(['/generate'], { state: { opened } });
     }
   }
 }
