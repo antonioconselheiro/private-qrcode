@@ -5,7 +5,8 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "ng serve --host=0.0.0.0",
-    "build": "ng build & sass-lint -c ./.sass-lint.yml -v -q",
+    "build": "ng build",
+    "lint:sass": "sass-lint -c ./.sass-lint.yml -v -q",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
