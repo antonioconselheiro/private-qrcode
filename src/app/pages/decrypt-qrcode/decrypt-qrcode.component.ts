@@ -25,7 +25,7 @@ export class DecryptQrcodeComponent implements OnInit {
   }
 
   private getEncryptedFromHistoryState(): void {
-    this.encrypted = history.state.opened;
+    this.encrypted = history.state.encrypted;
   }
 
   private initForm(): void {
