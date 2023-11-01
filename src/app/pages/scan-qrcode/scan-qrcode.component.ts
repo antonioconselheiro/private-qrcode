@@ -43,7 +43,7 @@ export class ScanQrcodeComponent implements AfterViewInit, OnDestroy {
       }, {});
 
     const cameras = await QrScanner.listCameras();
-    await qrScanner.setCamera(cameras[0].id);
+    await qrScanner.setCamera(cameras[cameras.length - 1].id);
     await qrScanner.start();
     return Promise.resolve();
   }
