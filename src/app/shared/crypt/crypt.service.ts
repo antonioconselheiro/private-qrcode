@@ -19,6 +19,7 @@ export class CryptService {
   }
 
   decrypt(encrypted: string, key: string): string {
+    encrypted = encrypted.replace(/^.+;/, '');
     const decrypted = CryptoJS.AES.decrypt(encrypted, key, {
       iv: this.initializationVector,
       mode: this.mode,

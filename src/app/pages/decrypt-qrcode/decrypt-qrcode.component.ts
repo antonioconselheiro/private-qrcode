@@ -38,6 +38,7 @@ export class DecryptQrcodeComponent implements OnInit {
 
   unlock(): void {
     if (this.form.valid && this.encrypted) {
+      this.encrypted;
       const raw = this.form.getRawValue();
       const opened = this.cryptService.decrypt(this.encrypted, raw.key);
 
