@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CryptService } from 'src/app/shared/crypt/crypt.service';
 
 @Component({
   selector: 'app-decrypt-qrcode',
@@ -8,19 +9,35 @@ import { Router } from '@angular/router';
 })
 export class DecryptQrcodeComponent implements OnInit {
 
-  @ViewChild('key', { read: ElementRef })
-  key?: ElementRef<HTMLVideoElement>;
-
+  form!: FormGroup;
   encrypted?: string;
 
   constructor(
-    private router: Router
+    private fb: FormBuilder,
+    private cryptService: CryptService
   ) { }
 
   ngOnInit(): void {
+    this.getEncryptedFromHistoryState();
+    this.initForm();
+  }
+
+  private getEncryptedFromHistoryState(): void {
     this.encrypted = history.state.opened;
-    if (!this.encrypted) {
-      this.router.navigate(['home']);
+  }
+
+  private initForm(): void {
+    this.form = this.fb.group({  
+      key: ['', [
+        Validators.required.bind(this)
+      ]]
+    });
+  }
+
+  unlock(): void {
+    if (this.form.valid && this.encrypted) {
+      const raw = this.form.getRawValue();
+      this.cryptService.decrypt(this.encrypted, raw.key);
     }
   }
 }

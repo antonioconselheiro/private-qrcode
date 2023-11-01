@@ -6,7 +6,7 @@
   </svg>
   <input #key placeholder="insert the key" type="password" autocomplete="off" />
 </form>
-<div class="buttons">
+<div *ngIf="this.encrypted" class="buttons">
   <button class="btn" type="button">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -15,7 +15,7 @@
     Back
   </button>
 
-  <button class="btn btn-primary" type="button">
+  <button (click)="unlock()" class="btn btn-primary" type="button">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"></path>
