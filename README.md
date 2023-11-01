@@ -27,6 +27,8 @@ Store your secrets encrypted and printed in qrcode format, use this tool to gene
 > 
 > Onward.
 > Eric Hughes, <hughes@soda.berkeley.edu>
+>
+> [Cypherpunk Manifesto](https://nakamotoinstitute.org/static/docs/cypherpunk-manifesto.txt)
 
 ## Angular
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
