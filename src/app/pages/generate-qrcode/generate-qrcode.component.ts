@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CryptService } from '../../shared/crypt/crypt.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CryptService } from '../../shared/crypt/crypt.service';
 
 @Component({
   selector: 'app-generate-qrcode',

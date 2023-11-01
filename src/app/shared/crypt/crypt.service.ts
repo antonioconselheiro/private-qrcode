@@ -11,7 +11,7 @@ export class CryptService {
   private readonly padding = CryptoJS.pad.Pkcs7;
 
   encrypt(content: string, pin: string): string {
-    return 'aes:' + CryptoJS.AES.encrypt(content, String(pin), {
+    return 'encrypted:aes;' + CryptoJS.AES.encrypt(content, String(pin), {
       iv: this.initializationVector,
       mode: this.mode,
       padding: this.padding
