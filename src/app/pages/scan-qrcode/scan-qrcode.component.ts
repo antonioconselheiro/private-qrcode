@@ -37,7 +37,7 @@ export class ScanQrcodeComponent implements AfterViewInit, OnDestroy {
       video, result => {
         this.router.navigate([ 'open' ], {
           state: {
-            data: result.data
+            encrypted: result.data
           }
         });
       }, {});
