@@ -4,6 +4,7 @@ Pendências
 [ ] Permitir customizar o algoritimo de criptografia
 [ ] Pensar em forma de permitir ao usuário escolher um nome para o arquivo
 [ ] Escrever mensagens de erro deixando campos obrigatórios
+[ ] Tornar PWA
 
 Melhorias discutíveis
 [ ] Incluir campo de descrição do qrcode, a descrição deve ser inclusa em conjunto da imagem
