@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule
+  ],
+  exports: [
+    ShareQrcodeComponent
   ]
 })
 export class ShareQrcodeModule { }
