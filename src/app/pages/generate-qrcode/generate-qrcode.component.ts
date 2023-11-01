@@ -31,7 +31,7 @@ export class GenerateQrcodeComponent implements OnInit {
         Validators.required.bind(this)
       ]],
   
-      pin: ['', [
+      key: ['', [
         Validators.required.bind(this)
       ]]
     });
@@ -39,7 +39,7 @@ export class GenerateQrcodeComponent implements OnInit {
 
   onSubmit(): void {
     const raw = this.form.getRawValue();
-    const encrypted = this.cryptService.encrypt(raw.content, raw.pin);
+    const encrypted = this.cryptService.encrypt(raw.content, raw.key);
     this.router.navigate(['/share'], { state: { encrypted } });
   }
 }

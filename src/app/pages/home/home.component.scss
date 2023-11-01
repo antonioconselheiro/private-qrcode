@@ -6,7 +6,25 @@
   padding: 1rem;
   box-sizing: border-box;
 
+  h1 {
+    text-align: center;
+  }
+
+  .main-icon {
+    width: 100%;
+    margin-top: 3rem;
+    height: 200px;
+  }
+
   button {
     margin-bottom: 1rem;
+
+    svg {
+      margin-right: 1rem;
+    }
+  }
+
+  .space-between {
+    flex: 1 1 0px;
   }
 }

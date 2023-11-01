@@ -10,16 +10,16 @@ export class CryptService {
   private readonly mode = CryptoJS.mode.CBC;
   private readonly padding = CryptoJS.pad.Pkcs7;
 
-  encrypt(content: string, pin: string): string {
-    return 'encrypted:aes;' + CryptoJS.AES.encrypt(content, String(pin), {
+  encrypt(content: string, key: string): string {
+    return 'encrypted:aes;' + CryptoJS.AES.encrypt(content, String(key), {
       iv: this.initializationVector,
       mode: this.mode,
       padding: this.padding
     });
   }
 
-  decrypt(encrypted: string, pin: string): string {
-    const decrypted = CryptoJS.AES.decrypt(encrypted, pin, {
+  decrypt(encrypted: string, key: string): string {
+    const decrypted = CryptoJS.AES.decrypt(encrypted, key, {
       iv: this.initializationVector,
       mode: this.mode,
       padding: this.padding

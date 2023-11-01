@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class DecryptQrcodeComponent implements OnInit {
 
-  @ViewChild('pin', { read: ElementRef })
-  pin?: ElementRef<HTMLVideoElement>;
+  @ViewChild('key', { read: ElementRef })
+  key?: ElementRef<HTMLVideoElement>;
 
   encrypted?: string;
 
