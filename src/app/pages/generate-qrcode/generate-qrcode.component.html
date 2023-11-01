@@ -1,7 +1,7 @@
 <h1>Private QRCode</h1>
 <form id="generaQRCodeForm" [formGroup]="form" (submit)="onSubmit()" novalidate autocomplete="off">
   <textarea formControlName="content" name="content" placeholder="content to encrypt"></textarea>
-  <input formControlName="key" name="key" placeholder="insert a key" type="password" />
+  <input formControlName="key" name="key" placeholder="insert a key" type="password" autocomplete="off" />
 </form>
 <div class="buttons">
   <button routerLink="/home" class="btn" type="button">

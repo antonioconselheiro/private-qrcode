@@ -62,7 +62,12 @@ export class ShareQrcodeComponent implements OnInit {
     }
 
     return navigator.share({
-      files: [<File> blob],
+      files: [
+        new File([blob], 'image.png', {
+          type: blob.type,
+        })
+      ],
+      title: 'private qrcode'
     });
   }
 }
