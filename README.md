@@ -14,3 +14,17 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Donate
+There's still a lot of work to do.
+
+Lighting donate: <a href="lightning:peevedbeer57@walletofsatoshi.com">lightning:peevedbeer57@walletofsatoshi.com</a>
+
+![zap me](./imgs/qrcode-wallet-lighting.png)
+
+Bitcoin onchain donate: <a href="bitcoin:bc1qrm99lmmpwk7zsh7njpgthw87yvdm38j2lzpq7q">bc1qrm99lmmpwk7zsh7njpgthw87yvdm38j2lzpq7q</a>
+
+![zap me](./imgs/qrcode-wallet-bitcoin.png)
+
+## Contribute
+[CONTRIBUTE.md](./CONTRIBUTE.md)

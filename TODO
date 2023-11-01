@@ -1,3 +1,5 @@
 [ ] Permitir escolher a câmera
 [ ] Permitir customizar o initialization vector
 [ ] Permitir customizar o algoritimo de criptografia
+[ ] Incluir campo de descrição do qrcode, a descrição deve ser inclusa em conjunto da imagem
+[ ] Pensar em forma de permitir ao usuário escolher um nome para o arquivo

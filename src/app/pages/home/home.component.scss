@@ -2,13 +2,9 @@
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   padding: 1rem;
+  flex-direction: column;
   box-sizing: border-box;
-
-  h1 {
-    text-align: center;
-  }
 
   .main-icon {
     width: 100%;
