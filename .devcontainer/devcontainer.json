@@ -17,7 +17,8 @@
 				"manishsencha.readme-preview",
 				"wix.vscode-import-cost",
 				"stylelint.vscode-stylelint",
-				"karyfoundation.theme-karyfoundation-themes"
+				"karyfoundation.theme-karyfoundation-themes",
+				"ms-vsliveshare.vsliveshare"
 			]
 		}
 	}
