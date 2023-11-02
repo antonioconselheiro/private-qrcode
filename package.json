@@ -39,6 +39,7 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@angular/service-worker": "^16.2.0",
     "crypto-js": "^4.1.1",
     "qr-scanner": "^1.4.2",
     "qrcode": "^1.5.3",
