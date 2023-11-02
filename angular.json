@@ -19,6 +19,7 @@
           "options": {
             "outputPath": "docs",
             "index": "src/index.html",
+            "baseHref": "/private-qrcode/",
             "main": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -100,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
