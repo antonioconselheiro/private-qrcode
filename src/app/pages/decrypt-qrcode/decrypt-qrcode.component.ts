@@ -12,6 +12,7 @@ export class DecryptQrcodeComponent implements OnInit {
 
   form!: FormGroup;
   encrypted?: string;
+  invalidKey = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +30,7 @@ export class DecryptQrcodeComponent implements OnInit {
   }
 
   private initForm(): void {
+    this.invalidKey = false;
     this.form = this.fb.group({  
       key: ['', [
         Validators.required.bind(this)
@@ -37,12 +39,17 @@ export class DecryptQrcodeComponent implements OnInit {
   }
 
   unlock(): void {
-    debugger;
     if (this.form.valid && this.encrypted) {
-      const raw = this.form.getRawValue();
-      const opened = this.cryptService.decrypt(this.encrypted, raw.key);
-
-      this.router.navigate(['/generate'], { state: { opened } });
+      try {
+        const raw = this.form.getRawValue();
+        const opened = this.cryptService.decrypt(this.encrypted, raw.key);
+  
+        this.router
+          .navigate(['/generate'], { state: { opened } })
+          .catch(e => console.error(e));
+      } catch (e) {
+        this.invalidKey = true;
+      }
     }
   }
 }

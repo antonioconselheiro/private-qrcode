@@ -7,8 +7,8 @@ WORKDIR /private-qrcode
 COPY ./.gitconfig /root/.gitconfig
 COPY ./.ssh /root/.ssh
 RUN chmod 600 -R /root/.ssh
-RUN ssh-add -D
-RUN ssh-add ~/.ssh/id_ed25519
+# RUN ssh-add -D
+# RUN ssh-add ~/.ssh/id_ed25519
 
 ENV LANG C.UTF-8
 ENV TZ America/Sao_Paulo
