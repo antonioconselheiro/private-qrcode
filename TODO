@@ -3,11 +3,9 @@ Pendências
 [ ] criar estrutura de configurações avançasdas
  - [ ] Permitir customizar o initialization vector
  - [ ] Permitir customizar o algoritimo de criptografia
-[ ] Escrever mensagens de erro deixando campos obrigatórios
-[ ] Escrever mensagem de erro indicando que a key não foi capaz de abrir o qrcode
-[ ] Tornar PWA
+[X] Escrever mensagens de erro deixando campos obrigatórios
+[X] Escrever mensagem de erro indicando que a key não foi capaz de abrir o qrcode
+[~] Tornar PWA
 [ ] Load Qrcode - precisa carregar o qrcode do computador
 [ ] Validar usar o --host com 172.17.0.1
-
-Melhorias discutíveis
 [ ] Incluir campo de descrição do qrcode, a descrição deve ser inclusa em conjunto da imagem
