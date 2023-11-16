@@ -12,6 +12,8 @@ export class GenerateQrcodeComponent implements OnInit {
 
   form!: FormGroup;
 
+  submitted = false;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -22,7 +24,7 @@ export class GenerateQrcodeComponent implements OnInit {
     this.initForm();
   }
 
-  private initForm() {
+  private initForm(): void {
     const opened = history.state.opened;
     const currentState = opened ? String(opened) : '';
 
@@ -37,9 +39,27 @@ export class GenerateQrcodeComponent implements OnInit {
     });
   }
 
+  getErrorFromField(fieldName: string, errorType = 'required'): boolean {
+    if (!this.submitted) {
+      return false;
+    }
+
+    const control = this.form.controls[fieldName];
+
+    if (control && control.errors && control.errors[errorType]) {
+      return true;
+    }
+
+    return false;
+  }
+
   onSubmit(): void {
-    const raw = this.form.getRawValue();
-    const encrypted = this.cryptService.encrypt(raw.content, raw.key);
-    this.router.navigate(['/share'], { state: { encrypted } });
+    this.submitted = true;
+
+    if(this.form.valid){
+      const raw = this.form.getRawValue();
+      const encrypted = this.cryptService.encrypt(raw.content, raw.key);
+      this.router.navigate(['/share'], { state: { encrypted } });
+    }
   }
 }
