@@ -8,7 +8,7 @@
 Store your secrets encrypted and printed in qrcode format, use this tool to generate private qrcode with key and to open this private qrcode using this key.
 It's open source and work offline.
 
-[Run App](https://antonioconselheiro.github.io/private-qrcode)
+[CLICK HERE TO RUN APP](https://antonioconselheiro.github.io/private-qrcode)
 
 ## Cypherpunk
 > [...]
@@ -31,6 +31,10 @@ It's open source and work offline.
 >
 > [Cypherpunk Manifesto](https://nakamotoinstitute.org/static/docs/cypherpunk-manifesto.txt)
 
+## Install
+Open [https://antonioconselheiro.github.io/private-qrcode](https://antonioconselheiro.github.io/private-qrcode)
+
+![install using pwa](./tutorial/select-install.jpeg)
 
 ## Donate
 There's still a lot of work to do.
