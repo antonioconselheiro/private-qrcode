@@ -6,6 +6,7 @@
 
 # Private QRCode
 Store your secrets encrypted and printed in qrcode format, use this tool to generate private qrcode with key and to open this private qrcode using this key.
+It's open source and work offline.
 
 [Run App](https://antonioconselheiro.github.io/private-qrcode)
 
