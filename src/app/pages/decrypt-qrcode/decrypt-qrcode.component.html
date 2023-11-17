@@ -6,7 +6,7 @@
   </svg>
 </div>
 <form id="decryptForm" [formGroup]="form" (submit)="unlock()" novalidate autocomplete="off">
-  <input formControlName="key" name="key" #key placeholder="insert the key" type="password" autocomplete="off" />
+  <input formControlName="key" name="key" #key [class.has-value]="!!key.value" class="field-key" placeholder="insert the key" type="password" autocomplete="off" />
   <span *ngIf="invalidKey" class="error-msg">Invalid key</span>
 </form>
 <div class="buttons">
