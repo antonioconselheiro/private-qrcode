@@ -31,6 +31,13 @@ It's open source and work offline.
 >
 > [Cypherpunk Manifesto](https://nakamotoinstitute.org/static/docs/cypherpunk-manifesto.txt)
 
+## Usage
+### Generate Private QRCode
+![generate private qrcode](./tutorial/generate-qrcode.gif)
+
+### Open Private QRCode
+![open private qrcode](./tutorial/open-qrcode.gif)
+
 ## Install
 Open [https://antonioconselheiro.github.io/private-qrcode](https://antonioconselheiro.github.io/private-qrcode)
 
