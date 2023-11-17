@@ -14,16 +14,30 @@ export class ShareQrcodeComponent implements OnInit {
 
   ngOnInit(): void {
     const encrypted = history.state.encrypted;
+    //  TODO: include in canvas image
+    const title = history.state.title;
     const currentState = encrypted ? String(encrypted) : '';
-
     const canvas = document.createElement('canvas');
-    canvas.setAttribute('width', '500px');
-    canvas.setAttribute('height', '500px');
 
-    toCanvas(canvas, currentState, error => {
+    if (title) {
+      canvas.setAttribute('height', '750px');
+      canvas.setAttribute('width', '500px');
+    } else {
+      canvas.setAttribute('height', '500px');
+      canvas.setAttribute('width', '500px');
+    }
+
+    toCanvas(canvas, currentState, { margin: 5 }, error => {
       if (error) {
         console.error(error);
         return;
+      }
+
+      const ctx = canvas.getContext('2d');
+      if (ctx && title) {
+        ctx.fillStyle = '#000';
+        ctx.font = '15px "Segoe UI", Roboto, "Noto Sans", Helvetica, Arial, sans-serif';
+        ctx.fillText(title, 17, 10); 
       }
 
       setTimeout(() => this.src = canvas.toDataURL("image/png"));

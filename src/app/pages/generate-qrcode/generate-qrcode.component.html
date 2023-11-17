@@ -1,5 +1,6 @@
 <h1>Private QRCode</h1>
 <form id="generaQRCodeForm" [formGroup]="form" (submit)="onSubmit()" novalidate autocomplete="off">
+  <input formControlName="title" name="title" placeholder="insert a title (optional)" type="text" autocomplete="off" />
   <textarea formControlName="content" name="content" placeholder="content to encrypt"></textarea>
   <span *ngIf="getErrorFromField('content')" class="error-msg">*This field is required!</span>
   <input formControlName="key" name="key" placeholder="insert a key" type="password" autocomplete="off" />

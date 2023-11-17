@@ -11,7 +11,7 @@ export class CryptService {
   private readonly padding = CryptoJS.pad.Pkcs7;
 
   encrypt(content: string, key: string): string {
-    return 'encrypted:aes;' + CryptoJS.AES.encrypt(content, String(key), {
+    return `encrypted:aes?iv=${this.initializationVector};` + CryptoJS.AES.encrypt(content, String(key), {
       iv: this.initializationVector,
       mode: this.mode,
       padding: this.padding
@@ -19,6 +19,12 @@ export class CryptService {
   }
 
   decrypt(encrypted: string, key: string): string {
+    /**
+     * TODO: quando for permitido customizar o iv ou houverem
+     * outros apps utilizando o mesmo formato, então será urgente
+     * ter a leitura do iv para decriptar e a leitura do modelo
+     * de criptografia selecionado
+     */
     encrypted = encrypted.replace(/^.+;/, '');
     const decrypted = CryptoJS.AES.decrypt(encrypted, key, {
       iv: this.initializationVector,

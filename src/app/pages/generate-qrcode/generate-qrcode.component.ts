@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CryptService } from '../../shared/crypt/crypt.service';
 
@@ -10,7 +10,11 @@ import { CryptService } from '../../shared/crypt/crypt.service';
 })
 export class GenerateQrcodeComponent implements OnInit {
 
-  form!: FormGroup;
+  form!: FormGroup<{
+    title: FormControl<string | null>;
+    content: FormControl<string | null>;
+    key: FormControl<string | null>;
+  }>;
 
   submitted = false;
 
@@ -29,6 +33,8 @@ export class GenerateQrcodeComponent implements OnInit {
     const currentState = opened ? String(opened) : '';
 
     this.form = this.fb.group({
+      title: [''],
+
       content: [currentState, [
         Validators.required.bind(this)
       ]],
@@ -36,7 +42,7 @@ export class GenerateQrcodeComponent implements OnInit {
       key: ['', [
         Validators.required.bind(this)
       ]]
-    });
+    }) as FormGroup;
   }
 
   getErrorFromField(fieldName: string, errorType = 'required'): boolean {
@@ -44,8 +50,7 @@ export class GenerateQrcodeComponent implements OnInit {
       return false;
     }
 
-    const control = this.form.controls[fieldName];
-
+    const control = (this.form.controls as any)[fieldName];
     if (control && control.errors && control.errors[errorType]) {
       return true;
     }
@@ -58,8 +63,8 @@ export class GenerateQrcodeComponent implements OnInit {
 
     if(this.form.valid){
       const raw = this.form.getRawValue();
-      const encrypted = this.cryptService.encrypt(raw.content, raw.key);
-      this.router.navigate(['/share'], { state: { encrypted } });
+      const encrypted = this.cryptService.encrypt(raw.content || '', raw.key || '');
+      this.router.navigate(['/share'], { state: { encrypted, title: raw.title } });
     }
   }
 }
