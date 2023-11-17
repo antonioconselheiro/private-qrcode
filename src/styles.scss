@@ -76,8 +76,12 @@ h1 {
   cursor: pointer;
 }
 
-.error-msg{
+.error-msg {
   color: red;
+}
+
+input[type="password"].field-key.has-value {
+  letter-spacing: 20px;
 }
 
 textarea,

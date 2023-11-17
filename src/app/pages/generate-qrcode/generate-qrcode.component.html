@@ -3,7 +3,7 @@
   <input formControlName="title" name="title" placeholder="insert a title (optional)" type="text" autocomplete="off" />
   <textarea formControlName="content" name="content" placeholder="content to encrypt"></textarea>
   <span *ngIf="getErrorFromField('content')" class="error-msg">*This field is required!</span>
-  <input formControlName="key" name="key" placeholder="insert a key" type="password" autocomplete="off" />
+  <input formControlName="key" name="key" placeholder="insert a key" type="password" #key [class.has-value]="key.value" class="field-key" autocomplete="off" />
   <span *ngIf="getErrorFromField('key')" class="error-msg">*This field is required!</span>
 </form>
 <div class="buttons">
