@@ -34,10 +34,12 @@ It's open source and work offline.
 ## Usage
 ### Generate Private QRCode
 Encrypt your personal info with a key
+
 ![generate private qrcode](./tutorial/generate-qrcode.gif)
 
 ### Open Private QRCode
 Not your keys, not your qrcode
+
 ![open private qrcode](./tutorial/open-qrcode.gif)
 
 ## Install
