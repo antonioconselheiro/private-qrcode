@@ -24,7 +24,7 @@ export class CryptService {
   decrypt(encrypted: string, key: string): string {
     const parsed = this.parseEncryptedQrcode(encrypted);
     if (parsed.encrypted && parsed.type === 'aes') {
-      const decrypted = CryptoJS.AES.decrypt(encrypted, key, {
+      const decrypted = CryptoJS.AES.decrypt(parsed.content, key, {
         iv: parsed.iv,
         mode: this.mode,
         padding: this.padding
