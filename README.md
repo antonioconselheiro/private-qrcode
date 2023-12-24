@@ -54,6 +54,9 @@ Lighting donate: <a href="lightning:peevedbeer57@walletofsatoshi.com">lightning:
 
 ![zap me](https://raw.githubusercontent.com/antonioconselheiro/antonioconselheiro/main/img/qrcode-wallet-lighting.png)
 
+## References
+- [https://github.com/antonioconselheiro/encrypted-uri](https://github.com/antonioconselheiro/encrypted-uri)
+
 Bitcoin onchain donate: <a href="bitcoin:bc1qrm99lmmpwk7zsh7njpgthw87yvdm38j2lzpq7q">bc1qrm99lmmpwk7zsh7njpgthw87yvdm38j2lzpq7q</a>
 
 ![zap me](https://raw.githubusercontent.com/antonioconselheiro/antonioconselheiro/main/img/qrcode-wallet-bitcoin.png)
