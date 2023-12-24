@@ -2,7 +2,7 @@
 > churches; To him that overcometh will I give to eat of the hidden
 > manna, and will give him a white stone, and in the stone a new name
 > written, which no man knoweth saving he that receiveth it."
-> Apocalipse 2:17
+> Apocalypse 2:17
 
 # Private QRCode
 Store your secrets encrypted and printed in qrcode format, use this tool to generate private qrcode with key and to open this private qrcode using this key.
