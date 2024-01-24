@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CryptService } from '../../shared/crypt/crypt.service';
-import { ConfirmKeyValidator } from './confirm-key.validator';
 
 @Component({
   selector: 'app-generate-qrcode',
@@ -43,17 +42,7 @@ export class GenerateQrcodeComponent implements OnInit {
       key: ['', [
         Validators.required.bind(this)
       ]]
-    }, {
-      validators : [ConfirmKeyValidator.getValidator()]
     }) as FormGroup;
-  }
-
-  getErrorFromForm(errorType : string): boolean{
-    if (!this.submitted) {
-      return false;
-    }
-
-    return !!(this.form.errors && this.form.errors[errorType]);
   }
 
   getErrorFromField(fieldName: string, errorType = 'required'): boolean {
