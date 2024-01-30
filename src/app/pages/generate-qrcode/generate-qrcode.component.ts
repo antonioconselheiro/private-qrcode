@@ -43,7 +43,7 @@ export class GenerateQrcodeComponent implements OnInit {
       key: ['', [
         Validators.required.bind(this)
       ]],
-      
+
       confirmKey: ['', [
         Validators.required.bind(this)
       ]]
@@ -60,7 +60,7 @@ export class GenerateQrcodeComponent implements OnInit {
     return !!(this.form.errors && this.form.errors[errorType]);
   }
 
-  getErrorFromField(fieldName: string, errorType = 'required'): boolean {
+   getErrorFromField(fieldName: string, errorType = 'required'): boolean {
     if (!this.submitted) {
       return false;
     }
