@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import QrScanner from 'qr-scanner';
+import packageJson from 'package.json';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,8 @@ export class HomeComponent {
   constructor(
     private router: Router
   ) { }
+
+  protected appVersion : string = packageJson.version;
 
   uploadPicture(): void {
     const input = document.createElement('input');
