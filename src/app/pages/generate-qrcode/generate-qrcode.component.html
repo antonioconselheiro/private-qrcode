@@ -5,6 +5,9 @@
   <span *ngIf="getErrorFromField('content')" class="error-msg">*This field is required!</span>
   <input formControlName="key" name="key" placeholder="insert a key" type="password" #key [class.has-value]="!!key.value" class="field-key" autocomplete="off" />
   <span *ngIf="getErrorFromField('key')" class="error-msg">*This field is required!</span>
+  <input formControlName="confirmKey" name="confirmKey" placeholder="Confirm the key" type="password" #confirmKey [class.has-value]="!!confirmKey.value" class="field-key" autocomplete="off" />
+  <span *ngIf="getErrorFromField('confirmKey')" class="error-msg">*This field is required!</span>
+  <span *ngIf="getErrorFromForm('confirmKey')" class="error-msg">*Divergent confirmation field!</span>
 </form>
 <div class="buttons">
   <button routerLink="/home" class="btn" type="button">
