@@ -4,7 +4,7 @@
   "description": "store your secret strings encrypted and printed in qrcode format, use this tool to open and generate private qrcode",
   "scripts": {
     "start": "npm run dev",
-    "dev": "ng serve --host=0.0.0.0",
+    "dev": "ng serve --disable-host-check",
     "build": "ng build",
     "lint:sass": "sass-lint -c ./.sass-lint.yml -v -q",
     "watch": "ng build --watch --configuration development",
