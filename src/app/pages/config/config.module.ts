@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigComponent } from './config.component';
 
 @NgModule({
@@ -7,7 +8,8 @@ import { ConfigComponent } from './config.component';
     ConfigComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     ConfigComponent
