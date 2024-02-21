@@ -6,8 +6,6 @@ import { EncryptedURI, TEncryptedURIKDFParams } from '@encrypted-uri/core';
 })
 export class EncryptedUriService {
 
-  constructor() { }
-
   match(encrypted: string): boolean {
     return EncryptedURI.matcher(encrypted);
   }

@@ -13,10 +13,22 @@ export class CryptoJSService {
     return /^encrypted:aes\?iv=/.test(encrypted);
   }
 
-  decrypt(encrypted: string, key: string): string {
+  encrypt(content: string, password: string): string {
+    const initializationVector = CryptoJS.enc.Hex.parse(
+      CryptoJS.lib.WordArray.random(128/8).toString()
+    );
+
+    return `encrypted:aes?iv=${initializationVector};` + CryptoJS.AES.encrypt(content, String(password), {
+      iv: initializationVector,
+      mode: this.mode,
+      padding: this.padding
+    });
+  }
+
+  decrypt(encrypted: string, password: string): string {
     const parsed = this.parseEncryptedQrcode(encrypted);
     if (parsed.encrypted && parsed.type === 'aes') {
-      const decrypted = CryptoJS.AES.decrypt(parsed.content, key, {
+      const decrypted = CryptoJS.AES.decrypt(parsed.content, password, {
         iv: parsed.iv,
         mode: this.mode,
         padding: this.padding
