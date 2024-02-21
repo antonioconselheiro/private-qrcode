@@ -6,7 +6,7 @@ import { DecryptQrcodeModule } from './pages/decrypt-qrcode/decrypt-qrcode.modul
 import { GenerateQrcodeModule } from './pages/generate-qrcode/generate-qrcode.module';
 import { HomeModule } from './pages/home/home.module';
 import { ScanQrcodeModule } from './pages/scan-qrcode/scan-qrcode.module';
-import { CryptModule } from './shared/crypt/crypt.module';
+import { CryptoJSModule } from './shared/crypt/crypt.module';
 import { ShareQrcodeModule } from './pages/share-qrcode/share-qrcode.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -22,7 +22,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     GenerateQrcodeModule,
     ShareQrcodeModule,
     ScanQrcodeModule,
-    CryptModule,
+    CryptoJSModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

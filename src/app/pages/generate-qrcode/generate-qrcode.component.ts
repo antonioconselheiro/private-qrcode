@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CryptService } from '../../shared/crypt/crypt.service';
+import { CryptoJSService } from '../../shared/crypt/crypt.service';
 import { ConfirmKeyValidator } from './confirm-key.validator';
 
 @Component({
@@ -22,7 +22,7 @@ export class GenerateQrcodeComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private cryptService: CryptService
+    private cryptService: CryptoJSService
   ) { }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CryptService } from 'src/app/shared/crypt/crypt.service';
+import { CryptoJSService } from 'src/app/shared/crypt/crypt.service';
 
 @Component({
   selector: 'app-decrypt-qrcode',
@@ -17,7 +17,7 @@ export class DecryptQrcodeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private cryptService: CryptService
+    private cryptService: CryptoJSService
   ) { }
 
   ngOnInit(): void {
