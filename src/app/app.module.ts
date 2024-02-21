@@ -7,6 +7,8 @@ import { HomeModule } from './pages/home/home.module';
 import { ScanQrcodeModule } from './pages/scan-qrcode/scan-qrcode.module';
 import { ShareQrcodeModule } from './pages/share-qrcode/share-qrcode.module';
 import { CryptoJSModule } from './shared/crypt/crypt.module';
+import { ConfigModule } from './pages/config/config.module';
+import { DecryptedContentModule } from './pages/decrypted-content/decrypted-content.module';
 
 @NgModule({
   declarations: [
@@ -16,10 +18,12 @@ import { CryptoJSModule } from './shared/crypt/crypt.module';
     BrowserModule,
     AppRoutingModule,
     HomeModule,
+    ConfigModule,
     GenerateQrcodeModule,
     ShareQrcodeModule,
     ScanQrcodeModule,
-    CryptoJSModule
+    CryptoJSModule,
+    DecryptedContentModule
   ],
   bootstrap: [AppComponent]
 })

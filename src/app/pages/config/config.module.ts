@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DecryptedContentComponent } from './decrypted-content.component';
+import { ConfigComponent } from './config.component';
 
 @NgModule({
   declarations: [
-    DecryptedContentComponent
+    ConfigComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    DecryptedContentComponent
+    ConfigComponent
   ]
 })
-export class DecryptedContentModule { }
+export class ConfigModule { }

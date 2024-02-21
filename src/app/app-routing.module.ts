@@ -5,6 +5,8 @@ import { ScanQrcodeComponent } from './pages/scan-qrcode/scan-qrcode.component';
 import { DecryptQrcodeComponent } from './pages/decrypt-qrcode/decrypt-qrcode.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ShareQrcodeComponent } from './pages/share-qrcode/share-qrcode.component';
+import { DecryptedContentComponent } from './pages/decrypted-content/decrypted-content.component';
+import { ConfigComponent } from './pages/config/config.component';
 
 const routes: Routes = [
   {
@@ -28,8 +30,18 @@ const routes: Routes = [
   },
 
   {
+    path: 'opened',
+    component: DecryptedContentComponent
+  },
+
+  {
     path: 'share',
     component: ShareQrcodeComponent
+  },
+
+  {
+    path: 'config',
+    component: ConfigComponent
   },
 
   {
