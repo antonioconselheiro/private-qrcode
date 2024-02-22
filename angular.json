@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "private-qrcode:build:production"
+              "buildTarget": "private-qrcode:build:production"
             },
             "development": {
-              "browserTarget": "private-qrcode:build:development"
+              "buildTarget": "private-qrcode:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "private-qrcode:build"
+            "buildTarget": "private-qrcode:build"
           }
         },
         "test": {
