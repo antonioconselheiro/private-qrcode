@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import * as nip49 from 'nostr-tools/lib/types/nip49';
 import { nip19 } from 'nostr-tools';
 import { hexToBytes } from '@noble/ciphers/utils';
+const nip49 = require('nostr-tools/nip49');
 
 @Injectable({
   providedIn: 'root'

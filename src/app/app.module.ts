@@ -9,6 +9,7 @@ import { ShareQrcodeModule } from './pages/share-qrcode/share-qrcode.module';
 import { CryptoJSModule } from './shared/crypt/crypt.module';
 import { ConfigModule } from './pages/config/config.module';
 import { DecryptedContentModule } from './pages/decrypted-content/decrypted-content.module';
+import { DecryptQrcodeModule } from './pages/decrypt-qrcode/decrypt-qrcode.module';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,11 @@ import { DecryptedContentModule } from './pages/decrypted-content/decrypted-cont
     ShareQrcodeModule,
     ScanQrcodeModule,
     CryptoJSModule,
+    DecryptQrcodeModule,
     DecryptedContentModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

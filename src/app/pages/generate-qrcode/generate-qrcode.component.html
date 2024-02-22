@@ -1,13 +1,85 @@
 <h1>Private QRCode</h1>
-<form id="generaQRCodeForm" [formGroup]="form" (submit)="onSubmit()" novalidate autocomplete="off">
-  <input formControlName="title" name="title" placeholder="insert a title (optional)" type="text" autocomplete="off" />
-  <textarea formControlName="content" name="content" placeholder="content to encrypt"></textarea>
-  <span *ngIf="getErrorFromField('content')" class="error-msg">*This field is required!</span>
-  <input formControlName="key" name="key" placeholder="insert a key" type="password" #key [class.has-value]="!!key.value" class="field-key" autocomplete="off" />
-  <span *ngIf="getErrorFromField('key')" class="error-msg">*This field is required!</span>
-  <input formControlName="confirmKey" name="confirmKey" placeholder="Confirm the key" type="password" #confirmKey [class.has-value]="!!confirmKey.value" class="field-key" autocomplete="off" />
-  <span *ngIf="getErrorFromField('confirmKey')" class="error-msg">*This field is required!</span>
-  <span *ngIf="getErrorFromForm('confirmKey')" class="error-msg">*Divergent confirmation field!</span>
+<form
+  id="generaQRCodeForm"
+  [formGroup]="form"
+  (submit)="onSubmit()"
+  novalidate
+  autocomplete="off"
+>
+  <div class="buttons">
+    <label class="btn" for="configDefault">
+      <input id="configDefault" type="radio" />
+      <button type="button">
+        Default
+      </button>
+    </label>
+
+    <label class="btn" for="configNostrCredential">
+      <input id="configNostrCredential" type="radio" />
+      <button type="button">
+        Nostr Credential
+      </button>
+    </label>
+
+    <label class="btn" for="configCustomized">
+      <input id="configCustomized" type="radio" />
+      <button type="button">
+        Customized
+      </button>
+    </label>
+  </div>
+
+  <input
+    name="title"
+    type="text"
+    formControlName="title"
+    placeholder="insert a title (optional)"
+    autocomplete="off"
+  />
+
+  <textarea
+    name="content"
+    formControlName="content"
+    placeholder="content to encrypt"
+  ></textarea>
+  <span
+    *ngIf="getErrorFromField('content')"
+    class="error-msg"
+  >*This field is required!</span>
+
+  <input
+    formControlName="key"
+    name="key"
+    placeholder="insert a key"
+    type="password"
+    #key
+    [class.has-value]="!!key.value"
+    class="field-key"
+    autocomplete="off"
+  />
+  <span
+    *ngIf="getErrorFromField('key')"
+    class="error-msg"
+  >*This field is required!</span>
+
+  <input
+    #confirmKey
+    name="confirmKey"
+    placeholder="Confirm the key"
+    formControlName="confirmKey"
+    type="password"
+    [class.has-value]="!!confirmKey.value"
+    class="field-key"
+    autocomplete="off"
+  />
+  <span
+    class="error-msg"
+    *ngIf="getErrorFromField('confirmKey')"
+  >*This field is required!</span>
+  <span
+    class="error-msg"
+    *ngIf="getErrorFromForm('confirmKey')"
+  >*Divergent confirmation field!</span>
 </form>
 <div class="buttons">
   <button routerLink="/home" class="btn" type="button">
