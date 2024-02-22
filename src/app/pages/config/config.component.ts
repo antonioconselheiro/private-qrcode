@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ModalableDirective } from '@belomonte/async-modal-ngx';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss']
 })
-export class ConfigComponent {
+export class ConfigComponent extends ModalableDirective<void, void {
+
+  response = new Subject<void>();
 
   submitted = false;
 
@@ -24,7 +28,9 @@ export class ConfigComponent {
 
   constructor(
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+    super();
+  }
 
   getErrors(property: string, errorName: string): boolean {
     const controls: any = this.form.controls;

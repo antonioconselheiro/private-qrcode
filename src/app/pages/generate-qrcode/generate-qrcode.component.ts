@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ConfirmKeyValidator } from './confirm-key.validator';
 import { CryptoJSService } from '../../shared/crypt/crypto-js.service';
+import { ModalService } from '@belomonte/async-modal-ngx';
+import { ConfigComponent } from '../config/config.component';
 
 @Component({
   selector: 'app-generate-qrcode',
@@ -21,6 +23,7 @@ export class GenerateQrcodeComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private modalService: ModalService,
     private fb: FormBuilder,
     private cryptoJSService: CryptoJSService
   ) { }
@@ -52,6 +55,11 @@ export class GenerateQrcodeComponent implements OnInit {
     }, {
       validators: [ConfirmKeyValidator.getValidator()]
     }) as FormGroup;
+  }
+
+  customizeConfigs(): void {
+    this.modalService
+      .createModal(ConfigComponent)
   }
 
   getErrorFromForm(errorType: string): boolean {

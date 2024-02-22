@@ -40,11 +40,6 @@ const routes: Routes = [
   },
 
   {
-    path: 'config',
-    component: ConfigComponent
-  },
-
-  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

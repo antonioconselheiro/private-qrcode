@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { IconSettings } from 'angular-tabler-icons/icons';
+import { AsyncModalModule } from '@belomonte/async-modal-ngx';
 
 @NgModule({
   declarations: [
@@ -12,11 +13,9 @@ import { IconSettings } from 'angular-tabler-icons/icons';
   ],
   imports: [
     CommonModule,
+    AsyncModalModule,
     RouterModule,
-    ReactiveFormsModule,
-    TablerIconsModule.pick({
-      IconSettings
-    }),
+    ReactiveFormsModule
   ],
   exports: [
     GenerateQrcodeComponent
