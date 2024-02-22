@@ -36,6 +36,8 @@ export class GenerateQrcodeComponent implements OnInit {
     this.form = this.fb.group({
       title: [''],
 
+      config: [ 'default' ],
+
       content: [currentState, [
         Validators.required.bind(this)
       ]],

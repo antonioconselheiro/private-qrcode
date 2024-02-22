@@ -1,6 +1,6 @@
 {
   "name": "private-qrcode",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "store your secret strings encrypted and printed in qrcode format, use this tool to open and generate private qrcode",
   "scripts": {
     "start": "npm run dev",
@@ -43,6 +43,7 @@
     "@encrypted-uri/ciphers": "^1.1.3",
     "@encrypted-uri/core": "^1.1.2",
     "@noble/ciphers": "^0.5.1",
+    "angular-tabler-icons": "^2.46.0",
     "crypto-js": "^4.1.1",
     "nostr-tools": "^2.3.1",
     "qr-scanner": "^1.4.2",
