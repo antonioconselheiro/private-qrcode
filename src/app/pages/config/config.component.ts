@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss']
 })
-export class ConfigComponent extends ModalableDirective<void, void {
+export class ConfigComponent extends ModalableDirective<void, void> {
 
   response = new Subject<void>();
 

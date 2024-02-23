@@ -23,8 +23,8 @@ export class GenerateQrcodeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private modalService: ModalService,
     private fb: FormBuilder,
+    private modalService: ModalService,
     private cryptoJSService: CryptoJSService
   ) { }
 
