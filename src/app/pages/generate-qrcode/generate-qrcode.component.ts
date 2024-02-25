@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConfirmKeyValidator } from './confirm-key.validator';
-import { CryptoJSService } from '../../shared/crypt/crypto-js.service';
 import { ModalService } from '@belomonte/async-modal-ngx';
+import { CryptoJSService } from '../../shared/crypt/crypto-js.service';
 import { ConfigComponent } from '../config/config.component';
+import { ConfirmKeyValidator } from './confirm-key.validator';
 
 @Component({
   selector: 'app-generate-qrcode',
@@ -13,11 +13,7 @@ import { ConfigComponent } from '../config/config.component';
 })
 export class GenerateQrcodeComponent implements OnInit {
 
-  form!: FormGroup<{
-    title: FormControl<string | null>;
-    content: FormControl<string | null>;
-    key: FormControl<string | null>;
-  }>;
+  form!: FormGroup;
 
   submitted = false;
 
@@ -52,9 +48,9 @@ export class GenerateQrcodeComponent implements OnInit {
       confirmKey: ['', [
         Validators.required.bind(this)
       ]]
-    }, {
-      validators: [ConfirmKeyValidator.getValidator()]
-    }) as FormGroup;
+    });
+
+    this.form.addValidators(ConfirmKeyValidator.getValidator());
   }
 
   customizeConfigs(): void {
@@ -75,7 +71,7 @@ export class GenerateQrcodeComponent implements OnInit {
       return false;
     }
 
-    const control = (this.form.controls as any)[fieldName];
+    const control = this.form.controls[fieldName];
     if (control && control.errors && control.errors[errorType]) {
       return true;
     }
