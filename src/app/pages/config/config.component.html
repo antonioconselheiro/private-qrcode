@@ -19,18 +19,6 @@
     </div>
 
     <div>
-      <label for="content">Content to encrypt:</label>
-      <textarea name="content" formControlName="content" id="content"></textarea>
-      <span *ngIf="getErrors('content', 'required')" class="error">* required</span>
-    </div>
-
-    <div>
-      <label for="encryptPassword">Encryptation password:</label>
-      <input formControlName="password" id="encryptPassword" type="password" name="password" />
-      <span *ngIf="getErrors('password', 'required')" class="error">* required</span>
-    </div>
-
-    <div>
       <label for="encryptKDFHasher">Select a KDF hasher</label>
       <select id="encryptKDFHasher" formControlName="kdfHasher" name="encryptKDFHasher">
         <option value="sha256">sha256</option>
@@ -55,8 +43,10 @@
       <input type="number" id="encryptKDFRounds" name="encryptKDFRounds" formControlName="kdfRounds" />
       <span *ngIf="getErrors('encryptKDFRounds', 'required')" class="error">* required</span>
     </div>
-
-    <button type="submit">encrypt</button>
-
   </fieldset>
+
+  <div class="buttons">
+    <button (click)="close()" class="btn" type="button">Back</button>
+    <button type="submit" class="btn btn-primary">Configure</button>
+  </div>
 </form>

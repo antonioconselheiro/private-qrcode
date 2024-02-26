@@ -5,6 +5,7 @@ import { ModalService } from '@belomonte/async-modal-ngx';
 import { CryptoJSService } from '../../shared/crypt/crypto-js.service';
 import { ConfigComponent } from '../config/config.component';
 import { ConfirmKeyValidator } from './confirm-key.validator';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-generate-qrcode',
@@ -54,8 +55,15 @@ export class GenerateQrcodeComponent implements OnInit {
   }
 
   customizeConfigs(): void {
-    this.modalService
-      .createModal(ConfigComponent)
+    firstValueFrom(
+      this.modalService
+        .createModal(ConfigComponent)
+        .setData({})
+        .setBindToRoute(this.router)
+        .build()
+    )
+    .then(data => console.info(data))
+    .catch(error => console.error(error));
   }
 
   getErrorFromForm(errorType: string): boolean {
@@ -85,7 +93,12 @@ export class GenerateQrcodeComponent implements OnInit {
     if (this.form.valid) {
       const raw = this.form.getRawValue();
       const encrypted = this.cryptoJSService.encrypt(raw.content || '', raw.key || '');
-      this.router.navigate(['/share'], { state: { encrypted, title: raw.title } });
+      this.router.navigate(['/share'], {
+        state: {
+          encrypted,
+          title: raw.title
+        }
+      });
     }
   }
 }

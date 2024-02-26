@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss']
 })
-export class ConfigComponent extends ModalableDirective<void, void> {
+export class ConfigComponent extends ModalableDirective<object, void> {
 
   response = new Subject<void>();
 
@@ -43,7 +43,7 @@ export class ConfigComponent extends ModalableDirective<void, void> {
     this.submitted = true;
     if (this.form.valid) {
       const raw = this.form.getRawValue();
-
+      console.info('raw', raw);
     }
   }
 }
