@@ -1,13 +1,13 @@
 :host {
   height: 100%;
   padding: 1rem;
+  display: block;
 }
 
 form {
   height: 100%;
 
   > fieldset {
-    margin: 1rem;
     padding: 1rem;
     
     label {
