@@ -2,15 +2,16 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalableDirective } from '@belomonte/async-modal-ngx';
 import { Subject } from 'rxjs';
+import { Config } from './config.type';
 
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss']
 })
-export class ConfigComponent extends ModalableDirective<object, void> {
+export class ConfigComponent extends ModalableDirective<object, Config> {
 
-  response = new Subject<void>();
+  response = new Subject<Config | void>();
 
   submitted = false;
 
@@ -43,7 +44,8 @@ export class ConfigComponent extends ModalableDirective<object, void> {
     this.submitted = true;
     if (this.form.valid) {
       const raw = this.form.getRawValue();
-      console.info('raw', raw);
+      this.response.next(raw);
+      this.close();
     }
   }
 }
