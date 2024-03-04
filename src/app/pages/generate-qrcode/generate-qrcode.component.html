@@ -76,7 +76,17 @@
     autocomplete="off"
   />
 
+  <input
+    *ngIf="!config"
+    name="content"
+    type="text"
+    maxlength="63"
+    formControlName="content"
+    placeholder="nostr secret (nsec)"
+  />
+
   <textarea
+    *ngIf="config"
     name="content"
     formControlName="content"
     placeholder="content to encrypt"
