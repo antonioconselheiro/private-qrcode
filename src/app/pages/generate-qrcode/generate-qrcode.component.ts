@@ -6,6 +6,7 @@ import { CryptoJSService } from '../../shared/crypt/crypto-js.service';
 import { ConfigComponent } from '../config/config.component';
 import { ConfirmKeyValidator } from './confirm-key.validator';
 import { firstValueFrom } from 'rxjs';
+import { Config } from '../config/config.type';
 
 @Component({
   selector: 'app-generate-qrcode',
@@ -13,6 +14,14 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./generate-qrcode.component.scss']
 })
 export class GenerateQrcodeComponent implements OnInit {
+
+  readonly defaultConfigs: Config = {
+    algorithm: 'aes/cbc',
+    kdfHasher: 'sha256',
+    kdfRounds: '32'
+  };
+
+  config: Config | null = this.defaultConfigs;
 
   form!: FormGroup;
 
@@ -58,12 +67,15 @@ export class GenerateQrcodeComponent implements OnInit {
     firstValueFrom(
       this.modalService
         .createModal(ConfigComponent)
-        .setData({})
+        .setData(this.config || this.defaultConfigs)
         .setBindToRoute(this.router)
         .build()
     )
-    .then(data => console.info(data))
-    .catch(error => console.error(error));
+    .then(config => {
+      if (config) {
+        this.config = config;
+      }
+    });
   }
 
   getErrorFromForm(errorType: string): boolean {

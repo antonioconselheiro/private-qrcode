@@ -9,7 +9,7 @@ import { Config } from './config.type';
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss']
 })
-export class ConfigComponent extends ModalableDirective<object, Config> {
+export class ConfigComponent extends ModalableDirective<Config, Config> {
 
   response = new Subject<Config | void>();
 
@@ -31,6 +31,14 @@ export class ConfigComponent extends ModalableDirective<object, Config> {
     private formBuilder: FormBuilder
   ) {
     super();
+  }
+
+  override onInjectData(data: Config): void {
+    this.form.setValue({
+      algorithm: data.algorithm,
+      kdfHasher: data.kdfHasher,
+      kdfRounds: data.kdfRounds
+    });
   }
 
   getErrors(property: string, errorName: string): boolean {
