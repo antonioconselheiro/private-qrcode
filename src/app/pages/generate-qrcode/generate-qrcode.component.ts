@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalService } from '@belomonte/async-modal-ngx';
-import { CryptoJSService } from '../../shared/crypt/crypto-js.service';
-import { ConfigComponent } from '../config/config.component';
-import { ConfirmKeyValidator } from './confirm-key.validator';
 import { firstValueFrom } from 'rxjs';
+import { EncryptedUriService } from '../../shared/crypt/encrypted-uri.service';
+import { NostrNcryptsecService } from '../../shared/crypt/nostr-ncryptsec.service';
+import { ConfigComponent } from '../config/config.component';
 import { Config } from '../config/config.type';
+import { ConfirmKeyValidator } from './confirm-key.validator';
 import { NostrSecretValidator } from './nostr-secret.validator';
 
 @Component({
@@ -32,7 +33,8 @@ export class GenerateQrcodeComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private modalService: ModalService,
-    private cryptoJSService: CryptoJSService
+    private encryptedUriService: EncryptedUriService,
+    private nostrNcryptsecService: NostrNcryptsecService
   ) { }
 
   ngOnInit(): void {
@@ -101,12 +103,21 @@ export class GenerateQrcodeComponent implements OnInit {
     return false;
   }
 
+  encrypt(content: string, password: string): Promise<string> {
+    if (this.config) {
+      return this.encryptedUriService.encrypt(content, password, this.config);
+    } else {
+      const result = this.nostrNcryptsecService.encrypt(content, password);
+      return Promise.resolve(result);
+    }
+  }
+
   onSubmit(): void {
     this.submitted = true;
 
     if (this.form.valid) {
       const raw = this.form.getRawValue();
-      const encrypted = this.cryptoJSService.encrypt(raw.content || '', raw.key || '');
+      const encrypted = this.encrypt(raw.content, raw.password);
       this.router.navigate(['/share'], {
         state: {
           encrypted,

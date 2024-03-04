@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EncryptedURI, TEncryptedURIKDFParams } from '@encrypted-uri/core';
+import { EncryptedURI } from '@encrypted-uri/core';
+import { Config } from '../../pages/config/config.type';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,18 @@ export class EncryptedUriService {
   encrypt(
     content: string,
     password: string,
-    config: { algorithm: string } & TEncryptedURIKDFParams
+    config: Config
   ): Promise<string> {
     return EncryptedURI.encrypt({
       content,
       password,
-      algorithm: config.algorithm,
-      kdf: config
+      algorithm: config.algorithm || 'aes/cbc',
+      kdf: {
+        derivateKeyLength: 32,
+        kdf: 'pbkdf2',
+        hasher: config.kdfHasher || 'sha256',
+        rounds: Number(config.kdfRounds || '32')
+      }
     });
   }
 
