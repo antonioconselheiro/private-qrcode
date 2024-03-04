@@ -11,18 +11,37 @@ import { Config } from '../../domain/config.model';
 })
 export class ConfigComponent extends ModalableDirective<Config, Config> {
 
+  static config: Config = ConfigComponent.loadConfigs();
+
+  static loadConfigs(): Config {
+    const serialized = localStorage.getItem('private-qrcode-config');
+    if (serialized) {
+      try {
+        return JSON.parse(serialized);
+      } catch {
+      }
+    }
+
+    return {
+      algorithm: 'aes/cbc',
+      kdfHasher: 'sha256',
+      kdfRounds: '32',
+      saveConfig: true
+    };
+  }
+
   response = new Subject<Config | void>();
 
   submitted = false;
 
   form = this.formBuilder.group({
-    algorithm: ['aes/cbc', [
+    algorithm: [ConfigComponent.config.algorithm, [
       Validators.required.bind(this)
     ]],
-    kdfHasher: ['sha256', [
+    kdfHasher: [ConfigComponent.config.kdfHasher, [
       Validators.required.bind(this)
     ]],
-    kdfRounds: ['32', [
+    kdfRounds: [ConfigComponent.config.kdfRounds, [
       Validators.required.bind(this)
     ]],
     saveConfig: [true]
@@ -54,6 +73,10 @@ export class ConfigComponent extends ModalableDirective<Config, Config> {
     this.submitted = true;
     if (this.form.valid) {
       const raw = this.form.getRawValue();
+      if (raw.saveConfig) {
+        localStorage.setItem('private-qrcode-config', JSON.stringify(raw));
+      }
+
       this.response.next(raw);
       this.close();
     }
