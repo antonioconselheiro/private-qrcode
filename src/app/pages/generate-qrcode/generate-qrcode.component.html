@@ -10,21 +10,21 @@
 >
   <div class="buttons">
     <label class="btn-radio" for="configDefault" #radioConfigDefault>
-      <input name="config" id="configDefault" type="radio" value="default" checked />
+      <input name="config" formControlName="config" id="configDefault" type="radio" value="default" checked />
       <button (click)="radioConfigDefault.click(); config = defaultConfigs" class="btn" type="button">
         Default
       </button>
     </label>
 
     <label class="btn-radio" for="configNostrCredential" #radioConfigNostrCredential>
-      <input name="config" id="configNostrCredential" type="radio" value="nostrCredential" />
+      <input name="config" formControlName="config" id="configNostrCredential" type="radio" value="nostrCredential" />
       <button (click)="radioConfigNostrCredential.click(); config = null" class="btn" type="button">
         Nostr
       </button>
     </label>
 
     <label (click)="customizeConfigs()" class="btn-radio" for="configCustomized" #radioConfigCustomized>
-      <input name="config" id="configCustomized" type="radio" value="customized" />
+      <input name="config" formControlName="config" id="configCustomized" type="radio" value="customized" />
       <button (click)="radioConfigCustomized.click()" class="btn" type="button">
         Customized
       </button>
@@ -79,7 +79,7 @@
   <input
     *ngIf="!config"
     name="content"
-    type="text"
+    type="password"
     maxlength="63"
     formControlName="content"
     placeholder="nostr secret (nsec)"
@@ -95,6 +95,16 @@
     *ngIf="getErrorFromField('content')"
     class="error-msg"
   >*This field is required!</span>
+
+  <span
+    *ngIf="getErrorFromForm('invalidNostrPublicGivenInstead')"
+    class="error-msg"
+  >*Invalid! Nostr public (npub) was given instead Nostr Secret (nsec)</span>
+
+  <span
+    *ngIf="getErrorFromForm('invalidNostrSecret')"
+    class="error-msg"
+  >*Invalid Nostr Secret wad given!</span>
 
   <input
     formControlName="key"

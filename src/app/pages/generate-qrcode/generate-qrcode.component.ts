@@ -7,6 +7,7 @@ import { ConfigComponent } from '../config/config.component';
 import { ConfirmKeyValidator } from './confirm-key.validator';
 import { firstValueFrom } from 'rxjs';
 import { Config } from '../config/config.type';
+import { NostrSecretValidator } from './nostr-secret.validator';
 
 @Component({
   selector: 'app-generate-qrcode',
@@ -61,6 +62,7 @@ export class GenerateQrcodeComponent implements OnInit {
     });
 
     this.form.addValidators(ConfirmKeyValidator.getValidator());
+    this.form.addValidators(NostrSecretValidator.getValidator());
   }
 
   customizeConfigs(): void {
