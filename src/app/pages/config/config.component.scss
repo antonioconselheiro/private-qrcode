@@ -13,8 +13,17 @@ form {
   > fieldset {
     padding: 1rem;
     
-    label {
-      display: block;
+    > div {
+      margin: 1rem 0;
+
+      label {
+        display: block;
+      }
+
+      input[type=checkbox] {
+        width: 230px;
+        height: 20px;
+      }
     }
   }
 }

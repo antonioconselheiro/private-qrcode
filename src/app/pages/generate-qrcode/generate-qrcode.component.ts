@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { EncryptedUriService } from '../../shared/crypt/encrypted-uri.service';
 import { NostrNcryptsecService } from '../../shared/crypt/nostr-ncryptsec.service';
 import { ConfigComponent } from '../config/config.component';
-import { Config } from '../config/config.type';
+import { Config } from '../../domain/config.model';
 import { ConfirmKeyValidator } from './confirm-key.validator';
 import { NostrSecretValidator } from './nostr-secret.validator';
 
@@ -20,7 +20,8 @@ export class GenerateQrcodeComponent implements OnInit {
   readonly defaultConfigs: Config = {
     algorithm: 'aes/cbc',
     kdfHasher: 'sha256',
-    kdfRounds: '32'
+    kdfRounds: '32',
+    saveConfig: true
   };
 
   config: Config | null = this.defaultConfigs;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EncryptedURI } from '@encrypted-uri/core';
-import { Config } from '../../pages/config/config.type';
+import { Config } from '../../domain/config.model';
 
 @Injectable({
   providedIn: 'root'

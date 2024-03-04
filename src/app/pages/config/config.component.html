@@ -43,6 +43,11 @@
       <input type="number" id="encryptKDFRounds" name="encryptKDFRounds" formControlName="kdfRounds" />
       <span *ngIf="getErrors('encryptKDFRounds', 'required')" class="error">* required</span>
     </div>
+
+    <div>
+      <label for="saveConfig">Always use this configs to create:</label>
+      <input type="checkbox" id="saveConfig" name="saveConfig" formControlName="saveConfig" />
+    </div>
   </fieldset>
 
   <div class="flex-fill"></div>

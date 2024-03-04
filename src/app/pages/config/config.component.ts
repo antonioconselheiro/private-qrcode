@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalableDirective } from '@belomonte/async-modal-ngx';
 import { Subject } from 'rxjs';
-import { Config } from './config.type';
+import { Config } from '../../domain/config.model';
 
 @Component({
   selector: 'app-config',
@@ -24,7 +24,8 @@ export class ConfigComponent extends ModalableDirective<Config, Config> {
     ]],
     kdfRounds: ['32', [
       Validators.required.bind(this)
-    ]]
+    ]],
+    saveConfig: [true]
   });
 
   constructor(
@@ -37,7 +38,8 @@ export class ConfigComponent extends ModalableDirective<Config, Config> {
     this.form.setValue({
       algorithm: data.algorithm,
       kdfHasher: data.kdfHasher,
-      kdfRounds: data.kdfRounds
+      kdfRounds: data.kdfRounds,
+      saveConfig: data.saveConfig
     });
   }
 
