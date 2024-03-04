@@ -1,6 +1,6 @@
 FROM node:20
 
-RUN npm install husky eslint typescript @angular/cli sass-lint -g
+RUN npm install husky eslint typescript @angular/cli sass-lint cordova -g
 
 WORKDIR /private-qrcode
 
