@@ -11,7 +11,7 @@
   <div class="buttons">
     <label class="btn-radio" for="configDefault" #radioConfigDefault>
       <input name="config" formControlName="config" id="configDefault" type="radio" value="default" checked />
-      <button (click)="radioConfigDefault.click(); config = defaultConfigs" class="btn" type="button">
+      <button (click)="radioConfigDefault.click(); config = null" class="btn" type="button">
         Default
       </button>
     </label>
@@ -31,27 +31,27 @@
     </label>
   </div>
 
-  <div *ngIf="config" class="configs">
+  <div *ngIf="getChoosenConfig()" class="configs">
     <strong>encode: </strong>
     <span>encrypted uri</span>,
     
     <strong>algorithm: </strong>
-    <span>{{config.algorithm}}</span>,
+    <span>{{getChoosenConfig()?.algorithm}}</span>,
     
     <strong>kdf: </strong>
     <span>pbkdf2</span>,
     
     <strong>hasher: </strong>
-    <span>{{config.kdfHasher}}</span>,
+    <span>{{getChoosenConfig()?.kdfHasher}}</span>,
     
     <strong>iterations: </strong>
-    <span>{{config.kdfRounds}}</span>,
+    <span>{{getChoosenConfig()?.kdfRounds}}</span>,
     
     <strong>key length: </strong>
     <span>32</span>
   </div>
 
-  <div *ngIf="!config" class="configs">
+  <div *ngIf="!getChoosenConfig()" class="configs">
     <strong>encode: </strong>
     <span>nostr nip49</span>,
     

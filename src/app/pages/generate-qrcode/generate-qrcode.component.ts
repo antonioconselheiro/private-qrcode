@@ -17,14 +17,14 @@ import { NostrSecretValidator } from './nostr-secret.validator';
 })
 export class GenerateQrcodeComponent implements OnInit {
 
-  readonly defaultConfigs: Config = {
+  defaultConfigs: Config = {
     algorithm: 'aes/cbc',
     kdfHasher: 'sha256',
     kdfRounds: '32',
     saveConfig: true
   };
 
-  config: Config | null = this.defaultConfigs;
+  config: Config | null = null;
 
   form!: FormGroup;
 
@@ -39,7 +39,37 @@ export class GenerateQrcodeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.defaultConfigs = this.loadDefaultConfig();
     this.initForm();
+  }
+
+  getChoosenConfig(): Config | null {
+    const config = this.form.getRawValue();
+    console.info('config: ', config);
+    if (config.config === 'default') {
+      return this.defaultConfigs;
+    } else if (config.config === 'customized') {
+      return this.config || this.defaultConfigs;
+    }
+
+    return null;
+  }
+
+  private loadDefaultConfig(): Config {
+    const serialized = localStorage.getItem('private-qrcode-config');
+    if (serialized) {
+      try {
+        return JSON.parse(serialized);
+      } catch {
+      }
+    }
+
+    return {
+      algorithm: 'aes/cbc',
+      kdfHasher: 'sha256',
+      kdfRounds: '32',
+      saveConfig: true
+    }
   }
 
   private initForm(): void {
@@ -72,7 +102,7 @@ export class GenerateQrcodeComponent implements OnInit {
     firstValueFrom(
       this.modalService
         .createModal(ConfigComponent)
-        .setData(this.config || this.defaultConfigs)
+        .setData(this.config || this.getSavedConfigs())
         .setBindToRoute(this.router)
         .build()
     )
@@ -81,6 +111,18 @@ export class GenerateQrcodeComponent implements OnInit {
         this.config = config;
       }
     });
+  }
+
+  getSavedConfigs(): Config {
+    const serialized = localStorage.getItem('private-qrcode-config');
+    if (serialized) {
+      try {
+        return JSON.parse(serialized);
+      } catch {
+      }
+    }
+
+    return this.defaultConfigs;
   }
 
   getErrorFromForm(errorType: string): boolean {
@@ -104,12 +146,15 @@ export class GenerateQrcodeComponent implements OnInit {
     return false;
   }
 
-  encrypt(content: string, password: string): Promise<string> {
-    if (this.config) {
+  encrypt(content: string, password: string, config: string): Promise<string> {
+
+    if (config === 'customized' && this.config) {
       return this.encryptedUriService.encrypt(content, password, this.config);
-    } else {
-      const result = this.nostrNcryptsecService.encrypt(content, password);
+    } else if (config === 'nostrCredential') {
+      const result = this.nostrNcryptsecService.encrypt(content, password);      
       return Promise.resolve(result);
+    } else {
+      return this.encryptedUriService.encrypt(content, password, this.defaultConfigs);
     }
   }
 
@@ -118,7 +163,7 @@ export class GenerateQrcodeComponent implements OnInit {
 
     if (this.form.valid) {
       const raw = this.form.getRawValue();
-      const encrypted = this.encrypt(raw.content, raw.password);
+      const encrypted = this.encrypt(raw.content, raw.password, raw.config);
       this.router.navigate(['/share'], {
         state: {
           encrypted,
