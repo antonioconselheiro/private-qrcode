@@ -1,0 +1,33 @@
+:host {
+  height: 100%;
+  padding: 1rem;
+  display: block;
+  box-sizing: border-box;
+}
+
+form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  > fieldset {
+    padding: 1rem;
+    
+    > div {
+      margin: 1rem 0;
+
+      label {
+        display: block;
+      }
+
+      input[type=checkbox] {
+        width: 230px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.flex-fill {
+  flex: 1 1 0;
+}
