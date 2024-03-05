@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "ng serve --host=0.0.0.0",
-    "build": "ng build",
+    "build": "ng build && cp -r ./docs ./PrivateQRCode/www",
     "lint:sass": "sass-lint -c ./.sass-lint.yml -v -q",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

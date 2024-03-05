@@ -1,16 +1,22 @@
 # Install android
-FROM androidsdk/android-30
-RUN create avd --name Nexus5X --device "Nexus 5X" --package "system-images;android-30;google_apis;x86_64";
+FROM androidsdk/android-31
 
 # Install Git
 RUN apt update && apt install -y curl git
 
 # Install Node
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt install -y nodejs
+## Install nvm with node and npm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-# Install global command line tools
-RUN npm install husky eslint typescript @angular/cli sass-lint cordova -g
+ENV NODE_VERSION 20.11.1
+
+## nvm
+RUN echo 'export NVM_DIR="$HOME/.nvm"'                                                >> "$HOME/.bashrc"
+RUN echo 'mkdir -p $NVM_DIR'                                                          >> "$HOME/.bashrc"
+RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'                            >> "$HOME/.bashrc"
+RUN echo '[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"'          >> "$HOME/.bashrc"
+RUN echo 'nvm install node@v$NODE_VERSION && nvm use node@v$NODE_VERSION'               >> "$HOME/.bashrc"
+RUN echo 'npm install husky eslint typescript @angular/cli sass-lint cordova -g'  >> "$HOME/.bashrc"
 
 WORKDIR /private-qrcode
 
