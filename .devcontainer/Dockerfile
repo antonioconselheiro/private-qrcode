@@ -1,8 +1,6 @@
 # Install android
-FROM androidsdk/android-31
-
-# Install Git
-RUN apt update && apt install -y curl git
+FROM cimg/android:2024.01
+USER root
 
 # Install Node
 ## Install nvm with node and npm
@@ -15,7 +13,7 @@ RUN echo 'export NVM_DIR="$HOME/.nvm"'                                          
 RUN echo 'mkdir -p $NVM_DIR'                                                          >> "$HOME/.bashrc"
 RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'                            >> "$HOME/.bashrc"
 RUN echo '[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"'          >> "$HOME/.bashrc"
-RUN echo 'nvm install node@v$NODE_VERSION && nvm use node@v$NODE_VERSION'               >> "$HOME/.bashrc"
+RUN echo 'nvm install v$NODE_VERSION && nvm use v$NODE_VERSION'               >> "$HOME/.bashrc"
 RUN echo 'npm install husky eslint typescript @angular/cli sass-lint cordova -g'  >> "$HOME/.bashrc"
 
 WORKDIR /private-qrcode
