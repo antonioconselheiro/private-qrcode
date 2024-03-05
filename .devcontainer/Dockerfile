@@ -1,5 +1,15 @@
-FROM node:20
+# Install android
+FROM androidsdk/android-30
+RUN create avd --name Nexus5X --device "Nexus 5X" --package "system-images;android-30;google_apis;x86_64";
 
+# Install Git
+RUN apt update && apt install -y curl git
+
+# Install Node
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt install -y nodejs
+
+# Install global command line tools
 RUN npm install husky eslint typescript @angular/cli sass-lint cordova -g
 
 WORKDIR /private-qrcode
