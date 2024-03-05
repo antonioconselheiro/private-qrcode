@@ -1,12 +1,8 @@
 {
-  "name": "io.cordova.hellocordova",
-  "displayName": "HelloCordova",
-  "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "io.cordova.privateqrcode",
+  "displayName": "PrivateQRCode",
+  "version": "0.1.0",
+  "description": "store your secret strings encrypted and printed in qrcode format, use this tool to open and generate private qrcode",
   "keywords": [
     "ecosystem:cordova"
   ],
