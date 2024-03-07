@@ -1,11 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.privateqrcode" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Private QRCode</name>
-    <description>store your secret strings encrypted and printed in qrcode format, use this tool to open and generate private qrcode</description>
-    <author email="canudos.sudestino@gmail.com" href="https://cordova.apache.org">
-      António Conselheiro
-    </author>
-    <content src="index.html" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
+  <name>Private QRCode</name>
+  <description>store your secret strings encrypted and printed in qrcode format, use this tool to open and generate private qrcode</description>
+  <author email="canudos.sudestino@gmail.com" href="https://cordova.apache.org">
+    António Conselheiro
+  </author>
+  <content src="index.html" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <platform name="android">
+    <icon src="www/assets/icons/icon-72x72.png" density="mdpi" />
+    <icon src="www/assets/icons/icon-128x128.png" density="ldpi" />
+    <icon src="www/assets/icons/icon-192x192.png" density="hdpi" />
+    <icon src="www/assets/icons/icon-384x384.png" density="xhdpi" />
+    <icon src="www/assets/icons/icon-512x512.png" density="xxhdpi" />
+  </platform>
 </widget>

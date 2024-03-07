@@ -1,5 +1,5 @@
 # Install android
-FROM cimg/android:2024.01
+FROM mobiledevops/android-sdk-image
 USER root
 
 # Install Node
