@@ -8,18 +8,19 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"Angular.ng-template",
-				"ms-vscode.vscode-typescript-next",
-				"dbaeumer.vscode-eslint",
-				"eamodio.gitlens",
-				"ms-azuretools.vscode-docker",
-				"connieth.bubblegum",
-				"manishsencha.readme-preview",
-				"wix.vscode-import-cost",
-				"stylelint.vscode-stylelint",
-				"karyfoundation.theme-karyfoundation-themes",
-				"ms-vsliveshare.vsliveshare"
-			]
+        "Angular.ng-template",
+        "ms-vscode.vscode-typescript-next",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "ms-azuretools.vscode-docker",
+        "connieth.bubblegum",
+        "manishsencha.readme-preview",
+        "wix.vscode-import-cost",
+        "stylelint.vscode-stylelint",
+        "karyfoundation.theme-karyfoundation-themes",
+        "ms-vsliveshare.vsliveshare",
+        "ZainChen.json"
+      ]
 		}
 	}
 }

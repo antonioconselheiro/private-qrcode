@@ -8,6 +8,7 @@
     "build": "sh ./build.sh",
     "lint:sass": "sass-lint -c ./.sass-lint.yml -v -q",
     "watch": "ng build --watch --configuration development",
+    "waydroid": "waydroid app install ./dist/app-debug.apk",
     "test": "ng test",
     "lint": "ng lint"
   },
