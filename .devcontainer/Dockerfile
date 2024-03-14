@@ -1,20 +1,26 @@
 # Install android
-FROM cimg/android:2024.01
+FROM mobiledevops/android-sdk-image
 USER root
 
 # Install Node
 ## Install nvm with node and npm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
-ENV NODE_VERSION 20.11.1
 
 ## nvm
-RUN echo 'export NVM_DIR="$HOME/.nvm"'                                                >> "$HOME/.bashrc"
-RUN echo 'mkdir -p $NVM_DIR'                                                          >> "$HOME/.bashrc"
-RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'                            >> "$HOME/.bashrc"
-RUN echo '[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"'          >> "$HOME/.bashrc"
-RUN echo 'nvm install v$NODE_VERSION && nvm use v$NODE_VERSION'               >> "$HOME/.bashrc"
-RUN echo 'npm install husky eslint typescript @angular/cli sass-lint cordova -g'  >> "$HOME/.bashrc"
+ENV NVM_VERSION v10.2.4
+ENV NODE_VERSION v20.11.1
+ENV NVM_DIR /usr/local/nvm
+RUN mkdir $NVM_DIR
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN echo "source $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default" | bash
+
+# RUN npm install husky eslint typescript @angular/cli sass-lint cordova -g
 
 WORKDIR /private-qrcode
 
