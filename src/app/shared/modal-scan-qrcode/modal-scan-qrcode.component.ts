@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import QrScanner from 'qr-scanner';
 
 @Component({
-  selector: 'app-scan-qrcode',
-  templateUrl: './scan-qrcode.component.html',
-  styleUrls: ['./scan-qrcode.component.scss']
+  selector: 'app-modal-scan-qrcode',
+  templateUrl: './modal-scan-qrcode.component.html',
+  styleUrls: ['./modal-scan-qrcode.component.scss']
 })
-export class ScanQrcodeComponent implements AfterViewInit, OnDestroy {
+export class ModalScanQrcodeComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video', { read: ElementRef })
   videoEl?: ElementRef<HTMLVideoElement>;

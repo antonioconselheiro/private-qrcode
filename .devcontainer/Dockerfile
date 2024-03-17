@@ -18,9 +18,8 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN echo "source $NVM_DIR/nvm.sh && \
     nvm install $NODE_VERSION && \
     nvm alias default $NODE_VERSION && \
-    nvm use default" | bash
-
-# RUN npm install husky eslint typescript @angular/cli sass-lint cordova -g
+    nvm use default && \
+    npm install husky eslint typescript @angular/cli sass-lint cordova -g" | bash
 
 WORKDIR /private-qrcode
 

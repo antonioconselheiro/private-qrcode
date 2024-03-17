@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GenerateQrcodeComponent } from './pages/generate-qrcode/generate-qrcode.component';
-import { ScanQrcodeComponent } from './pages/scan-qrcode/scan-qrcode.component';
+import { ModalScanQrcodeComponent } from './shared/modal-scan-qrcode/modal-scan-qrcode.component';
 import { DecryptQrcodeComponent } from './pages/decrypt-qrcode/decrypt-qrcode.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ShareQrcodeComponent } from './pages/share-qrcode/share-qrcode.component';
@@ -17,11 +17,6 @@ const routes: Routes = [
   {
     path: 'generate',
     component: GenerateQrcodeComponent
-  },
-
-  {
-    path: 'scan',
-    component: ScanQrcodeComponent
   },
 
   {

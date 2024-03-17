@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GenerateQrcodeModule } from './pages/generate-qrcode/generate-qrcode.module';
 import { HomeModule } from './pages/home/home.module';
-import { ScanQrcodeModule } from './pages/scan-qrcode/scan-qrcode.module';
+import { ModalScanQrcodeModule } from './shared/modal-scan-qrcode/modal-scan-qrcode.module';
 import { ShareQrcodeModule } from './pages/share-qrcode/share-qrcode.module';
 import { CryptoJSModule } from './shared/crypt/crypt.module';
 import { ConfigModule } from './pages/config/config.module';
@@ -22,7 +22,7 @@ import { DecryptQrcodeModule } from './pages/decrypt-qrcode/decrypt-qrcode.modul
     ConfigModule,
     GenerateQrcodeModule,
     ShareQrcodeModule,
-    ScanQrcodeModule,
+    ModalScanQrcodeModule,
     CryptoJSModule,
     DecryptQrcodeModule,
     DecryptedContentModule
