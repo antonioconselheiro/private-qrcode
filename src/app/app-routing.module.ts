@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GenerateQrcodeComponent } from './pages/generate-qrcode/generate-qrcode.component';
-import { ModalScanQrcodeComponent } from './shared/modal-scan-qrcode/modal-scan-qrcode.component';
 import { DecryptQrcodeComponent } from './pages/decrypt-qrcode/decrypt-qrcode.component';
+import { DecryptedContentComponent } from './pages/decrypted-content/decrypted-content.component';
+import { GenerateQrcodeComponent } from './pages/generate-qrcode/generate-qrcode.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ShareQrcodeComponent } from './pages/share-qrcode/share-qrcode.component';
-import { DecryptedContentComponent } from './pages/decrypted-content/decrypted-content.component';
-import { ConfigComponent } from './pages/config/config.component';
 
 const routes: Routes = [
   {

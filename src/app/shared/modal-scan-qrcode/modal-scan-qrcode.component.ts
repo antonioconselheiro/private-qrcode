@@ -1,22 +1,23 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ModalableDirective } from '@belomonte/async-modal-ngx';
 import QrScanner from 'qr-scanner';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-modal-scan-qrcode',
   templateUrl: './modal-scan-qrcode.component.html',
   styleUrls: ['./modal-scan-qrcode.component.scss']
 })
-export class ModalScanQrcodeComponent implements AfterViewInit, OnDestroy {
+export class ModalScanQrcodeComponent
+  extends ModalableDirective<void, string>
+  implements AfterViewInit, OnDestroy {
 
   @ViewChild('video', { read: ElementRef })
   videoEl?: ElementRef<HTMLVideoElement>;
 
   scanning?: QrScanner;
 
-  constructor(
-    private router: Router
-  ) { }
+  response = new Subject<string | void>();
 
   ngAfterViewInit(): void {
     if (this.videoEl && this.videoEl.nativeElement) {
@@ -34,13 +35,8 @@ export class ModalScanQrcodeComponent implements AfterViewInit, OnDestroy {
 
   private async readQRCode(video: HTMLVideoElement): Promise<void> {
     const qrScanner = new QrScanner(
-      video, result => {
-        this.router.navigate([ 'open' ], {
-          state: {
-            encrypted: result.data
-          }
-        });
-      }, {});
+      video, result => this.response.next(result.data), {}
+    );
 
     const cameras = await QrScanner.listCameras();
     await qrScanner.setCamera(this.chooseCam(cameras).id);
