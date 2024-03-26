@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ModalScanQrcodeService {
+export class ScanQrcodeService {
 
   constructor(
     private modalService: ModalService
