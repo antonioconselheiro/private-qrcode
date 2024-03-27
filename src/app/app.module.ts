@@ -1,14 +1,15 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DecryptQrcodeModule } from './pages/decrypt-qrcode/decrypt-qrcode.module';
 import { GenerateQrcodeModule } from './pages/generate-qrcode/generate-qrcode.module';
 import { HomeModule } from './pages/home/home.module';
-import { ScanQrcodeModule } from './pages/scan-qrcode/scan-qrcode.module';
-import { CryptModule } from './shared/crypt/crypt.module';
+import { ModalScanQrcodeModule } from './shared/modal-scan-qrcode/modal-scan-qrcode.module';
 import { ShareQrcodeModule } from './pages/share-qrcode/share-qrcode.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { CryptoJSModule } from './shared/crypt/crypt.module';
+import { ConfigModule } from './pages/config/config.module';
+import { DecryptedContentModule } from './pages/decrypted-content/decrypted-content.module';
+import { DecryptQrcodeModule } from './pages/decrypt-qrcode/decrypt-qrcode.module';
 
 @NgModule({
   declarations: [
@@ -18,19 +19,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     BrowserModule,
     AppRoutingModule,
     HomeModule,
-    DecryptQrcodeModule,
+    ConfigModule,
     GenerateQrcodeModule,
     ShareQrcodeModule,
-    ScanQrcodeModule,
-    CryptModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+    ModalScanQrcodeModule,
+    CryptoJSModule,
+    DecryptQrcodeModule,
+    DecryptedContentModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

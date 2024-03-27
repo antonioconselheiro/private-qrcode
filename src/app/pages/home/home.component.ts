@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import QrScanner from 'qr-scanner';
 import packageJson from 'package.json';
+import { ScanQrcodeService } from '../../shared/modal-scan-qrcode/scan-qrcode.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import packageJson from 'package.json';
 export class HomeComponent {
   
   constructor(
-    private router: Router
+    private router: Router,
+    private scanQrcodeService: ScanQrcodeService
   ) { }
 
   protected appVersion : string = packageJson.version;
@@ -27,9 +29,20 @@ export class HomeComponent {
       if (file) {
         QrScanner
           .scanImage(file)
-          .then(encrypted => this.router.navigate(['/open'], { state: { encrypted } }))
+          .then(encrypted => this.router.navigate(['/open'], {
+            state: { encrypted }
+          }))
           .catch(e => console.error(e));
       }
-    })
+    });
+  }
+
+  openQrcodeScanner(): void {
+    this.scanQrcodeService
+      .scan()
+      .then(encrypted => this.router.navigate(['/open'], {
+        state: { encrypted }
+      }))
+      .catch(err => console.error(err));
   }
 }
