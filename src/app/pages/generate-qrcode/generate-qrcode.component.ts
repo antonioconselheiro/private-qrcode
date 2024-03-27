@@ -45,7 +45,7 @@ export class GenerateQrcodeComponent implements OnInit {
 
   getChoosenConfig(): Config | null {
     const config = this.form.getRawValue();
-    console.info('config: ', config);
+
     if (config.config === 'default') {
       return this.defaultConfigs;
     } else if (config.config === 'customized') {

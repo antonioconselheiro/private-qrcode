@@ -35,7 +35,10 @@ export class ModalScanQrcodeComponent
 
   private async readQRCode(video: HTMLVideoElement): Promise<void> {
     const qrScanner = new QrScanner(
-      video, result => this.response.next(result.data), {}
+      video, result => {
+        this.response.next(result.data);
+        this.close();
+      }, {}
     );
 
     const cameras = await QrScanner.listCameras();

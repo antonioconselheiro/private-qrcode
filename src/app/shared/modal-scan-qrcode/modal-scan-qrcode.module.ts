@@ -15,7 +15,8 @@ import { AsyncModalModule } from '@belomonte/async-modal-ngx';
     AsyncModalModule
   ],
   exports: [
-    ModalScanQrcodeComponent
+    ModalScanQrcodeComponent,
+    AsyncModalModule
   ],
   providers: [
     ScanQrcodeService

@@ -1,4 +1,4 @@
 Pendências
 [ ] Permitir escolher a câmera;
-[~] criar estrutura de configurações avançadas, permitir customizar o algoritimo de criptografia e seus parâmetros;
-[ ] Embarcar em android e oferecer uma versão instalável com obtainium;
+[X] criar estrutura de configurações avançadas, permitir customizar o algoritimo de criptografia e seus parâmetros;
+[X] Embarcar em android e oferecer uma versão instalável com obtainium;
