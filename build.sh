@@ -6,5 +6,5 @@ cd android
 cd ..
 rm -rf dist
 mkdir dist
-cp ./private-qrcode/android/app/build/outputs/apk/debug/app-debug.apk dist
+cp ./android/app/build/outputs/apk/debug/app-debug.apk dist
 chmod 777 -R dist
