@@ -16,6 +16,7 @@ export class ModalScanQrcodeComponent
   videoEl?: ElementRef<HTMLVideoElement>;
 
   scanning?: QrScanner;
+  cameras: QrScanner.Camera[] = [];
 
   response = new Subject<string | void>();
 
@@ -33,6 +34,26 @@ export class ModalScanQrcodeComponent
     this.stopScanning();
   }
 
+  flipCamera(): void {
+    const cameras = this.cameras;
+    const choosenCameraId = localStorage.getItem('choosenCameraId');
+    const index = cameras.findIndex(camera => camera.id === choosenCameraId);
+    const nextIndex = index + 1;
+    
+    let choosenCamera: QrScanner.Camera; 
+    if (cameras[nextIndex]) {
+      choosenCamera = cameras[nextIndex];
+    } else {
+      choosenCamera = cameras[0];
+    }
+
+    localStorage.setItem('choosenCameraId', choosenCamera.id);
+
+    if (this.videoEl && this.videoEl.nativeElement) {
+      this.readQRCode(this.videoEl.nativeElement);
+    }
+  }
+
   private async readQRCode(video: HTMLVideoElement): Promise<void> {
     const qrScanner = new QrScanner(
       video, result => {
@@ -41,18 +62,29 @@ export class ModalScanQrcodeComponent
       }, {}
     );
 
-    const cameras = await QrScanner.listCameras();
-    await qrScanner.setCamera(this.chooseCam(cameras).id);
+    if (!this.cameras) {
+      this.cameras = await QrScanner.listCameras();
+    }
+
+    await qrScanner.setCamera(this.chooseCam(this.cameras).id);
     await qrScanner.start();
     return Promise.resolve();
   }
 
-  private chooseCam(cameras: Array<QrScanner.Camera>): QrScanner.Camera {
+  private chooseCam(cameras: QrScanner.Camera[]): QrScanner.Camera {
     if (cameras.length === 1) {
       return cameras[0];
     }
 
-    return cameras.find(camera => /back/.test(camera.label)) || cameras[0];
+    const choosenCameraId = localStorage.getItem('choosenCameraId');
+    if (choosenCameraId) {
+      return { id: choosenCameraId } as QrScanner.Camera;
+    }
+
+    const backCamera = cameras.find(camera => /back/.test(camera.label)) || cameras[0];
+    localStorage.setItem('choosenCameraId', backCamera.id);
+
+    return backCamera;
   }
 
   private stopScanning(): void {
