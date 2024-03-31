@@ -73,15 +73,12 @@ export class GenerateQrcodeComponent implements OnInit {
   }
 
   private initForm(): void {
-    const opened = history.state.opened;
-    const currentState = opened ? String(opened) : '';
-
     this.form = this.fb.group({
       title: [''],
 
       config: [ 'default' ],
 
-      content: [currentState, [
+      content: [ '', [
         Validators.required.bind(this)
       ]],
 

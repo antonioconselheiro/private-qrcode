@@ -37,7 +37,7 @@ export class ShareQrcodeComponent implements OnInit {
       if (ctx && title) {
         ctx.fillStyle = '#000';
         ctx.font = '15px "Segoe UI", Roboto, "Noto Sans", Helvetica, Arial, sans-serif';
-        ctx.fillText(title, 17, 10); 
+        ctx.fillText(title, 17, 15); 
       }
 
       setTimeout(() => this.src = canvas.toDataURL("image/png"));

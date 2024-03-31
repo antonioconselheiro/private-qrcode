@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { EncryptedURI } from '@encrypted-uri/core';
 import { Config } from '../../domain/config.model';
 import '@encrypted-uri/ciphers/aes';
+import '@encrypted-uri/ciphers/hashes';
 
 @Injectable({
   providedIn: 'root'
