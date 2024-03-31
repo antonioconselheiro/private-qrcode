@@ -36,7 +36,7 @@ export class ModalScanQrcodeComponent
 
   flipCamera(): void {
     const cameras = this.cameras;
-    const choosenCameraId = localStorage.getItem('choosenCameraId');
+    const choosenCameraId = localStorage.getItem('private-qrcode-choosen-camera-id');
     const index = cameras.findIndex(camera => camera.id === choosenCameraId);
     const nextIndex = index + 1;
     
@@ -47,8 +47,7 @@ export class ModalScanQrcodeComponent
       choosenCamera = cameras[0];
     }
 
-    localStorage.setItem('choosenCameraId', choosenCamera.id);
-
+    localStorage.setItem('private-qrcode-choosen-camera-id', choosenCamera.id);
     if (this.videoEl && this.videoEl.nativeElement) {
       this.readQRCode(this.videoEl.nativeElement);
     }
@@ -76,13 +75,13 @@ export class ModalScanQrcodeComponent
       return cameras[0];
     }
 
-    const choosenCameraId = localStorage.getItem('choosenCameraId');
+    const choosenCameraId = localStorage.getItem('private-qrcode-choosen-camera-id');
     if (choosenCameraId) {
       return { id: choosenCameraId } as QrScanner.Camera;
     }
 
     const backCamera = cameras.find(camera => /back/.test(camera.label)) || cameras[0];
-    localStorage.setItem('choosenCameraId', backCamera.id);
+    localStorage.setItem('private-qrcode-choosen-camera-id', backCamera.id);
 
     return backCamera;
   }

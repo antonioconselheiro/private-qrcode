@@ -24,7 +24,7 @@ export class GenerateQrcodeComponent implements OnInit {
     saveConfig: true
   };
 
-  config: Config | null = null;
+  config: Config | null = this.defaultConfigs;
 
   form!: FormGroup;
 
@@ -163,7 +163,8 @@ export class GenerateQrcodeComponent implements OnInit {
 
     if (this.form.valid) {
       const raw = this.form.getRawValue();
-      const encrypted = this.encrypt(raw.content, raw.password, raw.config);
+
+      const encrypted = this.encrypt(raw.content, raw.key, raw.config);
       this.router.navigate(['/share'], {
         state: {
           encrypted,

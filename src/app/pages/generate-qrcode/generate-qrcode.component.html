@@ -11,7 +11,7 @@
   <div class="buttons">
     <label class="btn-radio" for="configDefault" #radioConfigDefault>
       <input name="config" formControlName="config" id="configDefault" type="radio" value="default" checked />
-      <button (click)="radioConfigDefault.click(); config = null" class="btn" type="button">
+      <button (click)="radioConfigDefault.click(); config = defaultConfigs" class="btn" type="button">
         Default
       </button>
     </label>
