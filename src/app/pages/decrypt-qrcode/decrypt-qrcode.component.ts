@@ -47,12 +47,17 @@ export class DecryptQrcodeComponent implements OnInit {
     if (this.form.valid && this.encrypted) {
       try {
         const raw = this.form.getRawValue();
-        const opened = this.decryptService.decrypt(this.encrypted, raw.key);
-  
-        this.router
-          .navigate(['/opened'], { state: { opened } })
-          .catch(e => console.error(e));
+        this.decryptService.decrypt(this.encrypted, raw.key)
+          .then(opened => {
+            this.router
+              .navigate(['/opened'], { state: { opened } });
+          })
+          .catch(e => {
+            console.error(e);
+            this.invalidKey = true;
+          });
       } catch (e) {
+        console.error(e);
         this.invalidKey = true;
       }
     }
