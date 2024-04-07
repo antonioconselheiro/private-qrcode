@@ -144,7 +144,6 @@ export class GenerateQrcodeComponent implements OnInit {
   }
 
   encrypt(content: string, password: string, config: string): Promise<string> {
-
     if (config === 'customized' && this.config) {
       return this.encryptedUriService.encrypt(content, password, this.config);
     } else if (config === 'nostrCredential') {

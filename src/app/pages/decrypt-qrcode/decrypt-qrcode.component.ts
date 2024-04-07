@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CryptoJSService } from '../../shared/crypt/crypto-js.service';
+import { DecryptService } from '../../shared/crypt/decrypt.service';
 
 @Component({
   selector: 'app-decrypt-qrcode',
@@ -17,7 +17,7 @@ export class DecryptQrcodeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private cryptoJSService: CryptoJSService
+    private decryptService: DecryptService
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +27,11 @@ export class DecryptQrcodeComponent implements OnInit {
 
   private getEncryptedFromHistoryState(): void {
     this.encrypted = history.state.encrypted;
+    if (!this.encrypted) {
+      this.router
+        .navigate(['/home'])
+        .catch(e => console.error(e));
+    }
   }
 
   private initForm(): void {
@@ -42,10 +47,10 @@ export class DecryptQrcodeComponent implements OnInit {
     if (this.form.valid && this.encrypted) {
       try {
         const raw = this.form.getRawValue();
-        const opened = this.cryptoJSService.decrypt(this.encrypted, raw.key);
+        const opened = this.decryptService.decrypt(this.encrypted, raw.key);
   
         this.router
-          .navigate(['/generate'], { state: { opened } })
+          .navigate(['/opened'], { state: { opened } })
           .catch(e => console.error(e));
       } catch (e) {
         this.invalidKey = true;
