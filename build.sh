@@ -2,7 +2,7 @@ ng build
 npx cap sync android
 sed -i "/<base /d" "./android/app/src/main/assets/public/index.html"
 cd android
-./gradlew assembleDebug
+./gradlew clean assembleDebug
 cd ..
 rm -rf dist
 mkdir dist
