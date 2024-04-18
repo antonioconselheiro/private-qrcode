@@ -5,7 +5,6 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "ng serve --host=0.0.0.0",
-    "test": "ng test",
     "build": "sh ./build.sh",
     "lint": "ng lint",
     "lint:sass": "sass-lint -c ./.sass-lint.yml -v -q",

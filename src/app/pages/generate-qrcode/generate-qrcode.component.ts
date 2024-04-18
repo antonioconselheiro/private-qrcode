@@ -160,13 +160,18 @@ export class GenerateQrcodeComponent implements OnInit {
     if (this.form.valid) {
       const raw = this.form.getRawValue();
 
-      const encrypted = this.encrypt(raw.content, raw.key, raw.config);
-      this.router.navigate(['/share'], {
-        state: {
-          encrypted,
-          title: raw.title
-        }
-      });
+      this.encrypt(
+        raw.content, raw.key, raw.config
+      ).then(encrypted => {
+        this.router.navigate(['/share'], {
+          state: {
+            encrypted,
+            title: raw.title
+          }
+        })
+        .catch(e => console.error(e));
+      })
+      .catch(e => console.error(e));
     }
   }
 }
