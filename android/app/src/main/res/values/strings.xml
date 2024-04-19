@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">private-qrcode</string>
-    <string name="title_activity_main">private-qrcode</string>
-    <string name="package_name">br.com.belomonte</string>
-    <string name="custom_url_scheme">br.com.belomonte</string>
+    <string name="app_name">Private QRCode</string>
+    <string name="title_activity_main">Private QRCode</string>
+    <string name="package_name">br.com.belomonte.privateqrcode</string>
+    <string name="custom_url_scheme">br.com.belomonte.privateqrcode</string>
 </resources>

@@ -1,4 +1,4 @@
-package br.com.belomonte;
+package br.com.belomonte.privateqrcode;
 
 import com.getcapacitor.BridgeActivity;
 
