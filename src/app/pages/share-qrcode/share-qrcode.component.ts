@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { toCanvas } from 'qrcode';
+import { FileExporterService } from '../../shared/file-exporter/file-exporter.service';
 
 @Component({
   selector: 'app-share-qrcode',
@@ -10,9 +11,15 @@ export class ShareQrcodeComponent implements OnInit {
 
   src?: string;
 
-  sharable = !!navigator.share;
+  constructor(
+    private fileExporterService: FileExporterService
+  ) { }
 
   ngOnInit(): void {
+    this.renderStateToCanvas();
+  }
+
+  private renderStateToCanvas(): void {
     const encrypted = history.state.encrypted;
     //  TODO: include in canvas image
     const title = history.state.title;
@@ -44,6 +51,10 @@ export class ShareQrcodeComponent implements OnInit {
     });
   }
 
+  isSharable(): Promise<boolean> {
+    return this.fileExporterService.isSharable();
+  }
+
   private async getQrcodeAsBlob(): Promise<Blob | null> {
     if (!this.src) {
       return Promise.resolve(null);
@@ -52,21 +63,22 @@ export class ShareQrcodeComponent implements OnInit {
     return fetch(this.src).then(res => res.blob());
   }
 
+  private getFileName(): string {
+    let fileName = `private qrcode.png`;
+    if (history.state.title) {
+      fileName = `private qrcode - ${history.state.title.replace(/[,<>:"/\\|?*]/g, '')}.png`;
+    }
+
+    return fileName;
+  }
+
   async save(): Promise<void> {
     const blob = await this.getQrcodeAsBlob();
     if (!blob) {
       return Promise.resolve();
     }
 
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-
-    a.href = url;
-    a.download = 'private-qrcode.png';
-    a.click();
-    
-    URL.revokeObjectURL(url);    
+    return this.fileExporterService.save(blob, this.getFileName());
   }
 
   async share(): Promise<void> {
@@ -75,13 +87,6 @@ export class ShareQrcodeComponent implements OnInit {
       return Promise.resolve();
     }
 
-    return navigator.share({
-      files: [
-        new File([blob], 'image.png', {
-          type: blob.type,
-        })
-      ],
-      title: 'private qrcode'
-    });
+    return this.fileExporterService.share(blob, this.getFileName());
   }
 }
