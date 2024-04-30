@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { toCanvas } from 'qrcode';
-import { FileExporterService } from '../../shared/file-exporter/file-exporter.service';
+import { FileManagerService } from '../../shared/file-manager/file-manager.service';
 
 @Component({
   selector: 'app-share-qrcode',
@@ -11,12 +11,19 @@ export class ShareQrcodeComponent implements OnInit {
 
   src?: string;
 
+  sharable = false;
+
   constructor(
-    private fileExporterService: FileExporterService
+    private fileExporterService: FileManagerService
   ) { }
 
   ngOnInit(): void {
     this.renderStateToCanvas();
+    this.loadSharable();
+  }
+
+  loadSharable(): void {
+    this.fileExporterService.isSharable().then(sharable => this.sharable = sharable);
   }
 
   private renderStateToCanvas(): void {
@@ -51,42 +58,30 @@ export class ShareQrcodeComponent implements OnInit {
     });
   }
 
-  isSharable(): Promise<boolean> {
-    return this.fileExporterService.isSharable();
-  }
-
-  private async getQrcodeAsBlob(): Promise<Blob | null> {
-    if (!this.src) {
-      return Promise.resolve(null);
-    }
-
-    return fetch(this.src).then(res => res.blob());
-  }
-
-  private getFileName(): string {
+  private generateFileName(): string {
     let fileName = `private qrcode.png`;
     if (history.state.title) {
-      fileName = `private qrcode - ${history.state.title.replace(/[,<>:"/\\|?*]/g, '')}.png`;
+      fileName = `private qrcode - ${history.state.title.replace(/[,<>:"/\\|?*]/g, '')} - ${new Date().getTime()}.png`;
     }
 
     return fileName;
   }
 
   async save(): Promise<void> {
-    const blob = await this.getQrcodeAsBlob();
-    if (!blob) {
+    const src = this.src;
+    if (!src) {
       return Promise.resolve();
     }
 
-    return this.fileExporterService.save(blob, this.getFileName());
+    return this.fileExporterService.save(src, this.generateFileName());
   }
 
   async share(): Promise<void> {
-    const blob = await this.getQrcodeAsBlob();
-    if (!blob) {
+    const src = this.src;
+    if (!src) {
       return Promise.resolve();
     }
 
-    return this.fileExporterService.share(blob, this.getFileName());
+    return this.fileExporterService.share(src, this.generateFileName());
   }
 }

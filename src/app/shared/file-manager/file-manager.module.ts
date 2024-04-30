@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FileExporterService } from './file-exporter.service';
+import { FileManagerService } from './file-manager.service';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   providers: [
-    FileExporterService
+    FileManagerService
   ]
 })
-export class FileExporterModule { }
+export class FileManagerModule { }
