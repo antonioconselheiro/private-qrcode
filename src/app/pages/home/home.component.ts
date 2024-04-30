@@ -24,7 +24,6 @@ export class HomeComponent {
     this.fileManagerService
       .load()
       .then(base64File => {
-        debugger;
         QrScanner
           .scanImage(base64File, {})
           .then(encrypted => this.router.navigate(['/open'], {

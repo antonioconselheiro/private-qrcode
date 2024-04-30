@@ -9,6 +9,12 @@
   justify-content: space-around;
 }
 
+@media only screen and (max-width: 400px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
+
 .space-between {
   flex: 1 1 0;
 }
