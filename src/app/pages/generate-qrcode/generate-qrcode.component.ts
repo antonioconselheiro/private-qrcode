@@ -99,7 +99,7 @@ export class GenerateQrcodeComponent implements OnInit {
     firstValueFrom(
       this.modalService
         .createModal(ConfigComponent)
-        .setData(this.config || this.getSavedConfigs())
+        .setData(this.getSavedConfigs())
         .setBindToRoute(this.router)
         .build()
     )
