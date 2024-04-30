@@ -7,8 +7,9 @@ import { base64 } from '@scure/base';
 @Injectable()
 export class FileManagerService {
 
-  private base64ToBlob(base64File: string, type = 'image/png'): Blob {
-    const binary = base64.decode(base64File);
+  private base64ToBlob(base64File: string): Blob {
+    const [,, type,, encoded] = Array.from(base64File.match(/(data:)([^ ]+)(;base64,)([^ ]+)/) || []);
+    const binary = base64.decode(encoded);
     const array = [];
     for (let i = 0; i < binary.length; i++) {
       array.push(binary[i]);
