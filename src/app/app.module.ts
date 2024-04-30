@@ -10,6 +10,8 @@ import { CryptoJSModule } from './shared/crypt/crypt.module';
 import { ConfigModule } from './pages/config/config.module';
 import { DecryptedContentModule } from './pages/decrypted-content/decrypted-content.module';
 import { DecryptQrcodeModule } from './pages/decrypt-qrcode/decrypt-qrcode.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { DecryptQrcodeModule } from './pages/decrypt-qrcode/decrypt-qrcode.modul
     ModalScanQrcodeModule,
     CryptoJSModule,
     DecryptQrcodeModule,
-    DecryptedContentModule
+    DecryptedContentModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   bootstrap: [
     AppComponent

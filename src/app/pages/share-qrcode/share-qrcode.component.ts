@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { toCanvas } from 'qrcode';
 import { FileManagerService } from '../../shared/file-manager/file-manager.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-share-qrcode',
@@ -14,7 +15,8 @@ export class ShareQrcodeComponent implements OnInit {
   sharable = false;
 
   constructor(
-    private fileExporterService: FileManagerService
+    private fileExporterService: FileManagerService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -73,7 +75,10 @@ export class ShareQrcodeComponent implements OnInit {
       return Promise.resolve();
     }
 
-    return this.fileExporterService.save(src, this.generateFileName());
+    await this.fileExporterService.save(src, this.generateFileName());
+    this.toastrService.success('File saved.');
+
+    return Promise.resolve();
   }
 
   async share(): Promise<void> {
