@@ -63,12 +63,12 @@ export class ModalScanQrcodeComponent
       }, {}
     );
 
-    if (!this.cameras.length) {
-      this.cameras = await QrScanner.listCameras();
-    }
-
+    this.cameras = await QrScanner.listCameras();
     await this.scanning.setCamera(this.chooseCam(this.cameras).id);
     await this.scanning.start();
+
+    // must check again
+    this.cameras = await QrScanner.listCameras();
 
     return Promise.resolve();
   }
