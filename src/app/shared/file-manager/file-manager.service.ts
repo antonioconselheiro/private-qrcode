@@ -3,6 +3,7 @@ import { Capacitor } from '@capacitor/core';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { base64 } from '@scure/base';
+import { FilePicker } from '@capawesome/capacitor-file-picker';
 
 @Injectable()
 export class FileManagerService {
@@ -17,7 +18,11 @@ export class FileManagerService {
     return new Blob([new Uint8Array(array)], { type: type });
   }
 
-  private blobToBase64(blobFile: Blob): Promise<string> {
+  private blobToBase64(blobFile?: Blob | null): Promise<string> {
+    if (!blobFile) {
+      return Promise.resolve('');
+    }
+
     return new Promise(resolve => {
       const reader = new FileReader();
       reader.onload = event => {
@@ -52,27 +57,11 @@ export class FileManagerService {
     }
   }
 
-  async load(type = 'image/*'): Promise<string> {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', type);
-    input.click();
-
-    const file = await new Promise<File | null>(resolve => {
-      input.addEventListener('change', () => {
-        const file = input.files && input.files[0] || null;
-        return resolve(file)
-      });
-    });
-
-    if (!file) {
-      return Promise.resolve('');
-    }
-
+  async load(): Promise<string> {
     if (Capacitor.getPlatform() === 'web') {
-      return this.webLoad(file);
+      return this.webLoad();
     } else {
-      return this.androidLoad(file);
+      return this.androidLoad();
     }
   }
 
@@ -126,17 +115,35 @@ export class FileManagerService {
     return Promise.resolve();
   }
 
-  private webLoad(file: File): Promise<string> {
+  private async webLoad(type = 'image/*'): Promise<string> {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', type);
+    input.click();
+
+    const file = await new Promise<File | null>(resolve => {
+      input.addEventListener('change', () => {
+        const file = input.files && input.files[0] || null;
+        return resolve(file)
+      });
+    });
+
+    if (!file) {
+      return Promise.resolve('');
+    }
+
     return this.blobToBase64(file);
   }
 
-  private async androidLoad(file: File): Promise<string> {
+  private async androidLoad(): Promise<string> {
     await Filesystem.requestPermissions();
-    const result = await Filesystem.readFile({
-      path: file.webkitRelativePath
+    const result = await FilePicker.pickImages({
+      multiple: false,
+      readData: true
     });
 
-    return Promise.resolve(result.data as string);
+    const file = result.files[0];
+    return Promise.resolve(`data:${file.mimeType};base64,${file.data || ''}`);
   }
 
   async isSharable(): Promise<boolean> {
