@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { toCanvas } from 'qrcode';
+import { FileManagerService } from '../../shared/file-manager/file-manager.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-share-qrcode',
@@ -10,9 +12,23 @@ export class ShareQrcodeComponent implements OnInit {
 
   src?: string;
 
-  sharable = !!navigator.share;
+  sharable = false;
+
+  constructor(
+    private fileExporterService: FileManagerService,
+    private toastrService: ToastrService
+  ) { }
 
   ngOnInit(): void {
+    this.renderStateToCanvas();
+    this.loadSharable();
+  }
+
+  loadSharable(): void {
+    this.fileExporterService.isSharable().then(sharable => this.sharable = sharable);
+  }
+
+  private renderStateToCanvas(): void {
     const encrypted = history.state.encrypted;
     //  TODO: include in canvas image
     const title = history.state.title;
@@ -37,51 +53,40 @@ export class ShareQrcodeComponent implements OnInit {
       if (ctx && title) {
         ctx.fillStyle = '#000';
         ctx.font = '15px "Segoe UI", Roboto, "Noto Sans", Helvetica, Arial, sans-serif';
-        ctx.fillText(title, 17, 10); 
+        ctx.fillText(title, 17, 15); 
       }
 
       setTimeout(() => this.src = canvas.toDataURL("image/png"));
     });
   }
 
-  private async getQrcodeAsBlob(): Promise<Blob | null> {
-    if (!this.src) {
-      return Promise.resolve(null);
+  private generateFileName(): string {
+    let fileName = `private qrcode.png`;
+    if (history.state.title) {
+      fileName = `private qrcode - ${history.state.title.replace(/[,<>:"/\\|?*]/g, '')} - ${new Date().getTime()}.png`;
     }
 
-    return fetch(this.src).then(res => res.blob());
+    return fileName;
   }
 
   async save(): Promise<void> {
-    const blob = await this.getQrcodeAsBlob();
-    if (!blob) {
+    const src = this.src;
+    if (!src) {
       return Promise.resolve();
     }
 
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    document.body.appendChild(a);
+    await this.fileExporterService.save(src, this.generateFileName());
+    this.toastrService.success('File saved.');
 
-    a.href = url;
-    a.download = 'private-qrcode.png';
-    a.click();
-    
-    URL.revokeObjectURL(url);    
+    return Promise.resolve();
   }
 
   async share(): Promise<void> {
-    const blob = await this.getQrcodeAsBlob();
-    if (!blob) {
+    const src = this.src;
+    if (!src) {
       return Promise.resolve();
     }
 
-    return navigator.share({
-      files: [
-        new File([blob], 'image.png', {
-          type: blob.type,
-        })
-      ],
-      title: 'private qrcode'
-    });
+    return this.fileExporterService.share(src, this.generateFileName());
   }
 }

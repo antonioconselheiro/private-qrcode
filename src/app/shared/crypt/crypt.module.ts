@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CryptoJSService } from './crypto-js.service';
 import { EncryptedUriService } from './encrypted-uri.service';
 import { NostrNcryptsecService } from './nostr-ncryptsec.service';
+import { DecryptService } from './decrypt.service';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { NostrNcryptsecService } from './nostr-ncryptsec.service';
   providers: [
     CryptoJSService,
     EncryptedUriService,
-    NostrNcryptsecService
+    NostrNcryptsecService,
+    DecryptService
   ]
 })
 export class CryptoJSModule { }

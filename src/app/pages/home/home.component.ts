@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import QrScanner from 'qr-scanner';
 import packageJson from 'package.json';
+import { ScanQrcodeService } from '../../shared/modal-scan-qrcode/scan-qrcode.service';
+import { FileManagerService } from '../../shared/file-manager/file-manager.service';
 
 @Component({
   selector: 'app-home',
@@ -11,25 +13,32 @@ import packageJson from 'package.json';
 export class HomeComponent {
   
   constructor(
-    private router: Router
+    private router: Router,
+    private fileManagerService: FileManagerService,
+    private scanQrcodeService: ScanQrcodeService
   ) { }
 
-  protected appVersion : string = packageJson.version;
+  protected appVersion: string = packageJson.version;
 
   uploadPicture(): void {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
-    input.addEventListener('change', event => {
-      const file = input.files && input.files[0] || null;
-
-      if (file) {
+    this.fileManagerService
+      .load()
+      .then(base64File => {
         QrScanner
-          .scanImage(file)
-          .then(encrypted => this.router.navigate(['/open'], { state: { encrypted } }))
+          .scanImage(base64File, {})
+          .then(encrypted => this.router.navigate(['/open'], {
+            state: { encrypted }
+          }))
           .catch(e => console.error(e));
-      }
-    })
+      }).catch(e => console.error(e));
+  }
+
+  openQrcodeScanner(): void {
+    this.scanQrcodeService
+      .scan()
+      .then(encrypted => this.router.navigate(['/open'], {
+        state: { encrypted }
+      }))
+      .catch(err => console.error(err));
   }
 }

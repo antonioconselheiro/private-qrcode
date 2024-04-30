@@ -24,7 +24,7 @@ export class GenerateQrcodeComponent implements OnInit {
     saveConfig: true
   };
 
-  config: Config | null = null;
+  config: Config | null = this.defaultConfigs;
 
   form!: FormGroup;
 
@@ -45,7 +45,7 @@ export class GenerateQrcodeComponent implements OnInit {
 
   getChoosenConfig(): Config | null {
     const config = this.form.getRawValue();
-    console.info('config: ', config);
+
     if (config.config === 'default') {
       return this.defaultConfigs;
     } else if (config.config === 'customized') {
@@ -73,15 +73,12 @@ export class GenerateQrcodeComponent implements OnInit {
   }
 
   private initForm(): void {
-    const opened = history.state.opened;
-    const currentState = opened ? String(opened) : '';
-
     this.form = this.fb.group({
       title: [''],
 
       config: [ 'default' ],
 
-      content: [currentState, [
+      content: [ '', [
         Validators.required.bind(this)
       ]],
 
@@ -102,7 +99,7 @@ export class GenerateQrcodeComponent implements OnInit {
     firstValueFrom(
       this.modalService
         .createModal(ConfigComponent)
-        .setData(this.config || this.getSavedConfigs())
+        .setData(this.getSavedConfigs())
         .setBindToRoute(this.router)
         .build()
     )
@@ -147,7 +144,6 @@ export class GenerateQrcodeComponent implements OnInit {
   }
 
   encrypt(content: string, password: string, config: string): Promise<string> {
-
     if (config === 'customized' && this.config) {
       return this.encryptedUriService.encrypt(content, password, this.config);
     } else if (config === 'nostrCredential') {
@@ -163,13 +159,19 @@ export class GenerateQrcodeComponent implements OnInit {
 
     if (this.form.valid) {
       const raw = this.form.getRawValue();
-      const encrypted = this.encrypt(raw.content, raw.password, raw.config);
-      this.router.navigate(['/share'], {
-        state: {
-          encrypted,
-          title: raw.title
-        }
-      });
+
+      this.encrypt(
+        raw.content, raw.key, raw.config
+      ).then(encrypted => {
+        this.router.navigate(['/share'], {
+          state: {
+            encrypted,
+            title: raw.title
+          }
+        })
+        .catch(e => console.error(e));
+      })
+      .catch(e => console.error(e));
     }
   }
 }

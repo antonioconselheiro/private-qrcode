@@ -54,6 +54,18 @@ export class ConfigComponent extends ModalableDirective<Config, Config> {
     this.submitted = true;
     if (this.form.valid) {
       const raw = this.form.getRawValue();
+      if (raw.kdfRounds && String(raw.kdfRounds).length > 3) {
+        const formattedNumber = Number(raw.kdfRounds).toLocaleString(undefined, {
+          useGrouping: true
+        });
+
+        const confirmMessage = `The key hash will run ${formattedNumber} times into your device, are you sure?`;
+        if (!confirm(confirmMessage)) {
+          return;
+        }
+      }
+
+
       if (raw.saveConfig) {
         localStorage.setItem('private-qrcode-config', JSON.stringify(raw));
       }
