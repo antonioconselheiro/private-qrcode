@@ -1,13 +1,142 @@
 <h1>Private QRCode</h1>
-<form id="generaQRCodeForm" [formGroup]="form" (submit)="onSubmit()" novalidate autocomplete="off">
-  <input formControlName="title" name="title" placeholder="insert a title (optional)" type="text" autocomplete="off" />
-  <textarea formControlName="content" name="content" placeholder="content to encrypt"></textarea>
-  <span *ngIf="getErrorFromField('content')" class="error-msg">*This field is required!</span>
-  <input formControlName="key" name="key" placeholder="insert a key" type="password" #key [class.has-value]="!!key.value" class="field-key" autocomplete="off" />
-  <span *ngIf="getErrorFromField('key')" class="error-msg">*This field is required!</span>
-  <input formControlName="confirmKey" name="confirmKey" placeholder="Confirm the key" type="password" #confirmKey [class.has-value]="!!confirmKey.value" class="field-key" autocomplete="off" />
-  <span *ngIf="getErrorFromField('confirmKey')" class="error-msg">*This field is required!</span>
-  <span *ngIf="getErrorFromForm('confirmKey')" class="error-msg">*Divergent confirmation field!</span>
+<form
+  id="generaQRCodeForm"
+  [formGroup]="form"
+  (submit)="onSubmit()"
+  novalidate
+  autocomplete="off"
+>
+  <div class="buttons">
+    <label class="btn-radio" for="configDefault" #radioConfigDefault>
+      <input name="config" formControlName="config" id="configDefault" type="radio" value="default" checked />
+      <button (click)="radioConfigDefault.click(); config = defaultConfigs" class="btn" type="button">
+        Default
+      </button>
+    </label>
+
+    <label class="btn-radio" for="configNostrCredential" #radioConfigNostrCredential>
+      <input name="config" formControlName="config" id="configNostrCredential" type="radio" value="nostrCredential" />
+      <button (click)="radioConfigNostrCredential.click(); config = null" class="btn" type="button">
+        Nostr
+      </button>
+    </label>
+
+    <label (click)="customizeConfigs()" class="btn-radio" for="configCustomized" #radioConfigCustomized>
+      <input name="config" formControlName="config" id="configCustomized" type="radio" value="customized" />
+      <button (click)="radioConfigCustomized.click()" class="btn" type="button">
+        Customized
+      </button>
+    </label>
+  </div>
+
+  <div *ngIf="getChoosenConfig()" class="configs">
+    <strong>encode: </strong>
+    <span>encrypted uri</span>,
+    
+    <strong>algorithm: </strong>
+    <span>{{getChoosenConfig()?.algorithm}}</span>,
+    
+    <strong>kdf: </strong>
+    <span>pbkdf2</span>,
+    
+    <strong>hasher: </strong>
+    <span>{{getChoosenConfig()?.kdfHasher}}</span>,
+    
+    <strong>iterations: </strong>
+    <span>{{getChoosenConfig()?.kdfRounds}}</span>,
+    
+    <strong>key length: </strong>
+    <span>32</span>
+  </div>
+
+  <div *ngIf="!getChoosenConfig()" class="configs">
+    <strong>encode: </strong>
+    <span>nostr nip49</span>,
+    
+    <strong>algorithm: </strong>
+    <span>xchacha20/poly1305</span>,
+    
+    <strong>kdf: </strong>
+    <span>scrypt</span>,
+    
+    <strong>exponential iterations: </strong>
+    <span>16</span>,
+    
+    <strong>key length: </strong>
+    <span>32</span>
+  </div>
+
+  <input
+    name="title"
+    type="text"
+    formControlName="title"
+    placeholder="insert a title (optional)"
+    autocomplete="off"
+  />
+
+  <input
+    *ngIf="!config"
+    name="content"
+    type="password"
+    maxlength="63"
+    formControlName="content"
+    placeholder="nostr secret (nsec)"
+  />
+
+  <textarea
+    *ngIf="config"
+    name="content"
+    formControlName="content"
+    placeholder="content to encrypt"
+  ></textarea>
+  <span
+    *ngIf="getErrorFromField('content')"
+    class="error-msg"
+  >*This field is required!</span>
+
+  <span
+    *ngIf="getErrorFromForm('invalidNostrPublicGivenInstead')"
+    class="error-msg"
+  >*Invalid! Nostr public (npub) was given instead Nostr Secret (nsec)</span>
+
+  <span
+    *ngIf="getErrorFromForm('invalidNostrSecret')"
+    class="error-msg"
+  >*Invalid Nostr Secret was given!</span>
+
+  <input
+    formControlName="key"
+    name="key"
+    placeholder="insert a key"
+    type="password"
+    #key
+    [class.has-value]="!!key.value"
+    class="field-key"
+    autocomplete="off"
+  />
+  <span
+    *ngIf="getErrorFromField('key')"
+    class="error-msg"
+  >*This field is required!</span>
+
+  <input
+    #confirmKey
+    name="confirmKey"
+    placeholder="Confirm the key"
+    formControlName="confirmKey"
+    type="password"
+    [class.has-value]="!!confirmKey.value"
+    class="field-key"
+    autocomplete="off"
+  />
+  <span
+    class="error-msg"
+    *ngIf="getErrorFromField('confirmKey')"
+  >*This field is required!</span>
+  <span
+    class="error-msg"
+    *ngIf="getErrorFromForm('confirmKey')"
+  >*Divergent confirmation field!</span>
 </form>
 <div class="buttons">
   <button routerLink="/home" class="btn" type="button">

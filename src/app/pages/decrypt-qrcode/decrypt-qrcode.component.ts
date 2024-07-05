@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CryptService } from 'src/app/shared/crypt/crypt.service';
+import { DecryptService } from '../../shared/crypt/decrypt.service';
 
 @Component({
   selector: 'app-decrypt-qrcode',
@@ -17,7 +17,7 @@ export class DecryptQrcodeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private cryptService: CryptService
+    private decryptService: DecryptService
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +27,11 @@ export class DecryptQrcodeComponent implements OnInit {
 
   private getEncryptedFromHistoryState(): void {
     this.encrypted = history.state.encrypted;
+    if (!this.encrypted) {
+      this.router
+        .navigate(['/home'])
+        .catch(e => console.error(e));
+    }
   }
 
   private initForm(): void {
@@ -42,12 +47,21 @@ export class DecryptQrcodeComponent implements OnInit {
     if (this.form.valid && this.encrypted) {
       try {
         const raw = this.form.getRawValue();
-        const opened = this.cryptService.decrypt(this.encrypted, raw.key);
-  
-        this.router
-          .navigate(['/generate'], { state: { opened } })
-          .catch(e => console.error(e));
+        this.decryptService.decrypt(this.encrypted, raw.key)
+          .then(opened => {
+            if (opened) {
+              this.router
+                .navigate(['/opened'], { state: { opened } });
+            } else {
+              this.invalidKey = true;
+            }
+          })
+          .catch(e => {
+            console.error(e);
+            this.invalidKey = true;
+          });
       } catch (e) {
+        console.error(e);
         this.invalidKey = true;
       }
     }

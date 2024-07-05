@@ -1,0 +1,58 @@
+<form
+  (submit)="onSubmit()"
+  [formGroup]="form"
+  novalidate
+  autocomplete="off"
+>
+  <fieldset>
+    <legend>Config</legend>
+
+    <div>
+      <label for="algorithm">Select an algorithm</label>
+      <select id="algorithm" formControlName="algorithm" name="algorithm">
+        <option value="aes/cbc">aes/cbc</option>
+        <option value="aes/ecb">aes/ecb</option>
+        <option value="aes/ctr">aes/ctr</option>
+        <option value="aes/gcm">aes/gcm</option>
+        <option value="aes/siv">aes/siv</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="encryptKDFHasher">Select a KDF hasher</label>
+      <select id="encryptKDFHasher" formControlName="kdfHasher" name="encryptKDFHasher">
+        <option value="sha256">sha256</option>
+        <option value="sha384">sha384</option>
+        <option value="sha512">sha512</option>
+        <option value="sha512_256">sha512_256</option>
+        <option value="sha3_224">sha3_224</option>
+        <option value="sha3_256">sha3_256</option>
+        <option value="sha3_384">sha3_384</option>
+        <option value="sha3_512">sha3_512</option>
+        <option value="keccak_224">keccak_224</option>
+        <option value="keccak_256">keccak_256</option>
+        <option value="keccak_384">keccak_384</option>
+        <option value="keccak_512">keccak_512</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="encryptKDFRounds">KDF rounds:</label>
+      <input type="number" id="encryptKDFRounds" name="encryptKDFRounds" formControlName="kdfRounds" maxlength="6" #encryptKDFRounds />
+      <span *ngIf="getErrors('encryptKDFRounds', 'required')" class="error">* required</span>
+      <span *ngIf="encryptKDFRounds.value.length > 3" class="warn-msg">hey calm down</span>
+    </div>
+
+    <div>
+      <label for="saveConfig">Set config as default:</label>
+      <input type="checkbox" id="saveConfig" name="saveConfig" formControlName="saveConfig" />
+    </div>
+  </fieldset>
+
+  <div class="flex-fill"></div>
+
+  <div class="buttons">
+    <button (click)="close()" class="btn" type="button">Back</button>
+    <button type="submit" class="btn btn-primary">Configure</button>
+  </div>
+</form>

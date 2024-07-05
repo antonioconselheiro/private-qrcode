@@ -9,12 +9,18 @@
   justify-content: space-around;
 }
 
+@media only screen and (max-width: 350px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
+
 .space-between {
   flex: 1 1 0;
 }
 
 img {
-  margin: 3rem auto;
+  margin: 1rem auto;
   display: block;
   background-color: black;
   width: 100%;
