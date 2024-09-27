@@ -36,20 +36,20 @@ export class ModalScanQrcodeComponent
 
   flipCamera(): void {
     const cameras = this.cameras;
-    const choosenCameraId = localStorage.getItem('privateQRcodeChoosenCameraId');
+    const choosenCameraId = (this.scanning as any)._preferredCamera;
     const index = cameras.findIndex(camera => camera.id === choosenCameraId);
     const nextIndex = index + 1;
     
-    let choosenCamera: QrScanner.Camera; 
+    let nextCamera: QrScanner.Camera;
     if (cameras[nextIndex]) {
-      choosenCamera = cameras[nextIndex];
+      nextCamera = cameras[nextIndex];
     } else {
-      choosenCamera = cameras[0];
+      nextCamera = cameras[0];
     }
 
-    localStorage.setItem('privateQRcodeChoosenCameraId', choosenCamera.id);
+    localStorage.setItem('privateQRcodeChoosenCameraId', nextCamera.id);
     if (this.scanning) {
-      this.scanning.setCamera(choosenCamera.id);
+      this.scanning.setCamera(nextCamera.id);
     }
   }
 
@@ -60,12 +60,22 @@ export class ModalScanQrcodeComponent
       video, result => {
         this.response.next(result.data);
         this.close();
-      }, {}
+      }, {
+        preferredCamera: 'environment'
+      }
     );
 
     this.cameras = await QrScanner.listCameras();
-    await this.scanning.setCamera(this.chooseCam(this.cameras).id);
+    const userChoosenCam = this.chooseCam(this.cameras);
+
+    if (userChoosenCam) {
+      if ((this.scanning as any)._preferredCamera !== userChoosenCam) {
+        await this.scanning.setCamera(userChoosenCam);
+      }
+    }
+
     await this.scanning.start();
+
 
     // must check again
     this.cameras = await QrScanner.listCameras();
@@ -73,20 +83,13 @@ export class ModalScanQrcodeComponent
     return Promise.resolve();
   }
 
-  private chooseCam(cameras: QrScanner.Camera[]): QrScanner.Camera {
-    if (cameras.length === 1) {
-      return cameras[0];
-    }
-
+  private chooseCam(cameras: QrScanner.Camera[]): QrScanner.DeviceId | null {
     const choosenCameraId = localStorage.getItem('privateQRcodeChoosenCameraId');
     if (choosenCameraId) {
-      return { id: choosenCameraId } as QrScanner.Camera;
+      return choosenCameraId;
     }
 
-    const backCamera = cameras.find(camera => /back/.test(camera.label)) || cameras[0];
-    localStorage.setItem('privateQRcodeChoosenCameraId', backCamera.id);
-
-    return backCamera;
+    return null;
   }
 
   private stopScanning(): void {
