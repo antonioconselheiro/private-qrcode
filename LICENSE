@@ -1,0 +1,11 @@
+Ungovernable License
+
+This license denies copyright authority.
+Anything infinitely copyable has no way to be a property.
+
+You can do whatever you want with this content and
+other not related projects with any kind of copyrights.
+
+This is anarchy, this is cypherpunk ascension.
+
+<http://owpa7cpoylktfl552tgjyqycgidlprqppqbjezt5nwsywh6bic2ozkyd.onion>
