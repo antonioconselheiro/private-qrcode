@@ -60,25 +60,26 @@ export class ModalScanQrcodeComponent
       video, result => {
         this.response.next(result.data);
         this.close();
-      }, {
-        preferredCamera: 'environment'
-      }
+      }, { }
     );
 
+    await this.scanning.start();
     this.cameras = await QrScanner.listCameras();
-    const userChoosenCam = this.chooseCam(this.cameras);
+    console.info('cameras', this.cameras);
+    let choosenCam = this.chooseCam(this.cameras);
 
-    if (userChoosenCam) {
-      if ((this.scanning as any)._preferredCamera !== userChoosenCam) {
-        await this.scanning.setCamera(userChoosenCam);
+    if (choosenCam) {
+      if ((this.scanning as any)._preferredCamera !== choosenCam) {
+        await this.scanning.setCamera(choosenCam);
+      }
+    } else {
+      choosenCam = this.cameras.find(camera => /rear|back|environment/i.test(camera.label))?.id || this.cameras[this.cameras.length - 1]?.id || null;
+      if (choosenCam) {
+        await this.scanning.setCamera(choosenCam);
       }
     }
 
-    await this.scanning.start();
-
-
-    // must check again
-    this.cameras = await QrScanner.listCameras();
+    setTimeout(() => console.info('scanning', this.scanning));
 
     return Promise.resolve();
   }
