@@ -1,9 +1,10 @@
 {
-  "name": "Existing Docker Compose (Extend)",
+  "name": "Private QRCode Dev",
   "dockerComposeFile": [
     "docker-compose.yml"
   ],
   "service": "private-qrcode-dev",
+  "postCreateCommand": "./.devcontainer/auth.sh",
 	"workspaceFolder": "/private-qrcode",
 	"customizations": {
 		"vscode": {

@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   private-qrcode-dev:
     image: private-qrcode-dev
